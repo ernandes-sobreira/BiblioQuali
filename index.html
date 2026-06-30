@@ -654,12 +654,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font
   <div class="pt"><div class="pe">Amostragem em cadeia</div><h1>Bola de Neve — Rede de Indicações</h1><p>Grafo interativo com física de força D3. Nós maiores = maior centralidade.</p></div>
   <div class="al ai" style="margin-bottom:1.2rem"><span class="al-i">ℹ</span><div><strong>Arraste os nós</strong> para reorganizar. Tamanho = grau de centralidade. Espessura da aresta = força da ligação informada.</div></div>
   <div class="sb"><div class="sbt">Adicionar participante</div>
-    <div class="ir"><div class="fld"><label>Nome / Código</label><input type="text" id="snn2" placeholder="P1..."></div><div class="fld"><label>Indicado por</label><input type="text" id="snr" placeholder="Seed"></div><div class="fld" style="max-width:140px"><label>Perfil</label><select id="snp"><option>Gestora(or)</option><option>Pesquisadora(or)</option><option>Moradora(or)</option><option>Técnica(o)</option><option>Outro</option></select></div><div class="fld" style="max-width:100px"><label>Força (1–5)</label><input type="number" id="snw" value="3" min="1" max="5"></div><button class="btn bp" style="align-self:flex-end" onclick="addSN()">+ Adicionar</button></div>
+    <div class="ir"><div class="fld"><label>Nome / Código</label><input type="text" id="snn2" placeholder="P1..."></div><div class="fld"><label>Indicado por</label><input type="text" id="snr" placeholder="Seed (ou nome de quem indicou)"></div><div class="fld" style="max-width:140px"><label>Perfil</label><select id="snp"><option>Gestora(or)</option><option>Pesquisadora(or)</option><option>Moradora(or)</option><option>Técnica(o)</option><option>Outro</option></select></div><div class="fld" style="max-width:100px"><label>Força (1–5)</label><input type="number" id="snw" value="3" min="1" max="5"></div><button class="btn bp" style="align-self:flex-end" onclick="addSN()">+ Adicionar</button></div>
   </div>
   <div id="snow-wrap"><svg id="snow-svg"></svg></div>
   <div class="sr-row" id="snst"></div>
   <div class="rs"><div class="rst">Lista de participantes</div>
-    <table class="dt" id="snt"><thead><tr><th>Código</th><th>Perfil</th><th>Indicado por</th><th>Grau</th><th>Geração</th></tr></thead><tbody id="snb"><tr><td colspan="5" style="color:var(--ink3)">Nenhum participante.</td></tr></tbody></table>
+    <table class="dt" id="snt"><thead><tr><th>Código</th><th>Perfil</th><th>Indicado por</th><th>Grau</th><th>Geração</th><th>Ações</th></tr></thead><tbody id="snb"><tr><td colspan="5" style="color:var(--ink3)">Nenhum participante.</td></tr></tbody></table>
   </div>
 </section>
 
@@ -1301,7 +1301,7 @@ function runForce(){
     .attr('viewBox',`0 0 ${W} ${H}`);
   svg.selectAll('*').remove();
   const nodes=snodes.map(n=>({...n}));
-  const links=snodes.filter(n=>n.ref&&n.ref!=='Seed'&&snodes.some(m=>m.id===n.ref))
+  const links=snodes.filter(n=>n.ref&&n.ref.toLowerCase()!=='seed'&&snodes.some(m=>m.id===n.ref))
     .map(n=>({source:n.ref,target:n.id,w:n.w}));
   const deg={};nodes.forEach(n=>{deg[n.id]=0});
   links.forEach(l=>{deg[l.target]=(deg[l.target]||0)+1});
@@ -1393,7 +1393,58 @@ function runForce(){
     mkP(links.length,'Ligações','var(--teal)')+
     mkP(Math.max(0,...Object.values(deg)),'Grau máximo','var(--violet)');
 }
-function updSNTable(){const gc={};document.getElementById('snb').innerHTML=snodes.map(n=>{const g=getGen(n.id,snodes,gc),d=snodes.filter(m=>m.ref===n.id).length;return`<tr><td><strong>${n.id}</strong></td><td>${n.prof}</td><td>${n.ref}</td><td>${d}</td><td>G${g}</td></tr>`}).join('')||'<tr><td colspan="5" style="color:var(--ink3)">Nenhum participante.</td></tr>'}
+function updSNTable(){
+  const gc={};
+  const tbody=document.getElementById('snb');
+  if(!tbody)return;
+  if(!snodes.length){
+    tbody.innerHTML='<tr><td colspan="6" style="color:var(--ink3)">Nenhum participante.</td></tr>';
+    return;
+  }
+  tbody.innerHTML=snodes.map((n,i)=>{
+    const g=getGen(n.id,snodes,gc);
+    const deg=snodes.filter(m=>m.ref===n.id).length;
+    return `<tr>
+      <td><strong>${n.id}</strong></td>
+      <td>${n.prof||n.profile||'—'}</td>
+      <td>${n.ref}</td>
+      <td>${deg}</td>
+      <td>G${g}</td>
+      <td style="display:flex;gap:4px">
+        <button class="btn bg bsm" onclick="editSN(${i})" title="Editar">✏️</button>
+        <button class="btn bg bsm" style="color:var(--acc)" onclick="deleteSN(${i})" title="Excluir">🗑</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function deleteSN(i){
+  if(!confirm('Remover '+snodes[i].id+'?'))return;
+  // Remover também quem foi indicado por este nó
+  const name=snodes[i].id;
+  snodes.splice(i,1);
+  // Atualizar referências órfãs para Seed
+  snodes.forEach(n=>{ if(n.ref===name) n.ref='Seed'; });
+  runForce();
+  updSNTable();
+}
+
+function editSN(i){
+  const n=snodes[i];
+  const newName=prompt('Nome / código:',n.id);
+  if(!newName||!newName.trim())return;
+  const newRef=prompt('Indicado por (Seed se for o início):',n.ref);
+  if(newRef===null)return;
+  const newW=parseInt(prompt('Força da ligação (1–5):',n.w||3));
+  // Atualizar referências de outros nós que apontavam para o nome antigo
+  const oldName=n.id;
+  snodes.forEach(m=>{ if(m.ref===oldName) m.ref=newName.trim(); });
+  snodes[i].id=newName.trim();
+  snodes[i].ref=newRef.trim()||'Seed';
+  snodes[i].w=isNaN(newW)?3:Math.min(5,Math.max(1,newW));
+  runForce();
+  updSNTable();
+}
 
 // SWOT
 function exportSwot(){const t=document.getElementById('swt').value||'Objeto';document.getElementById('swx').textContent=`MATRIZ SWOT — ${t}\n${'─'.repeat(50)}\n\nFORÇAS:\n${document.getElementById('swS').value||'—'}\n\nFRAQUEZAS:\n${document.getElementById('swW').value||'—'}\n\nOPORTUNIDADES:\n${document.getElementById('swO').value||'—'}\n\nAMEAÇAS:\n${document.getElementById('swT').value||'—'}`;document.getElementById('swe').style.display=''}
