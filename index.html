@@ -654,7 +654,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font
   <div class="pt"><div class="pe">Amostragem em cadeia</div><h1>Bola de Neve — Rede de Indicações</h1><p>Grafo interativo com física de força D3. Nós maiores = maior centralidade.</p></div>
   <div class="al ai" style="margin-bottom:1.2rem"><span class="al-i">ℹ</span><div><strong>Arraste os nós</strong> para reorganizar. Tamanho = grau de centralidade. Espessura da aresta = força da ligação informada.</div></div>
   <div class="sb"><div class="sbt">Adicionar participante</div>
-    <div class="ir"><div class="fld"><label>Nome / Código</label><input type="text" id="snn2" placeholder="P1..."></div><div class="fld"><label>Indicado por</label><input type="text" id="snr" placeholder="Seed (ou nome de quem indicou)"></div><div class="fld" style="max-width:140px"><label>Perfil</label><select id="snp"><option>Gestora(or)</option><option>Pesquisadora(or)</option><option>Moradora(or)</option><option>Técnica(o)</option><option>Outro</option></select></div><div class="fld" style="max-width:100px"><label>Força (1–5)</label><input type="number" id="snw" value="3" min="1" max="5"></div><button class="btn bp" style="align-self:flex-end" onclick="addSN()">+ Adicionar</button></div>
+    <div class="ir"><div class="fld"><label>Nome / Código</label><input type="text" id="snn2" placeholder="P1..."></div><div class="fld"><label>Indicado por</label>
+  <select id="snr" style="background:var(--bg);border:1px solid var(--bd);border-radius:var(--rs);padding:.5rem .75rem;font-size:13.5px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;min-height:36px">
+    <option value="Seed">Seed (ponto de partida)</option>
+  </select>
+</div><div class="fld" style="max-width:140px"><label>Perfil</label><select id="snp"><option>Gestora(or)</option><option>Pesquisadora(or)</option><option>Moradora(or)</option><option>Técnica(o)</option><option>Outro</option></select></div><div class="fld" style="max-width:100px"><label>Força (1–5)</label><input type="number" id="snw" value="3" min="1" max="5"></div><button class="btn bp" style="align-self:flex-end" onclick="addSN()">+ Adicionar</button>
+          <button class="btn bg" style="align-self:flex-end" onclick="if(confirm('Limpar todos os participantes?')){{snodes=[];updRefDropdown();runForce();updSNTable()}}">🗑 Limpar tudo</button></div>
   </div>
   <div id="snow-wrap"><svg id="snow-svg"></svg></div>
   <div class="sr-row" id="snst"></div>
@@ -1289,7 +1294,27 @@ function updFrq(){if(!codebook.length)return;const s=[...codebook].sort((a,b)=>b
 let snodes=[],sim=null;
 const PC={'Gestora(or)':'#2563eb','Pesquisadora(or)':'#0d9488','Moradora(or)':'#16a34a','Técnica(o)':'#7c3aed','Outro':'#d97706'};
 function getGen(id,nodes,cache={}){if(id in cache)return cache[id];const n=nodes.find(x=>x.id===id);if(!n||n.ref==='Seed'||n.ref===''){cache[id]=0;return 0}const g=getGen(n.ref,nodes,cache);cache[id]=g+1;return g+1}
-function addSN(){const name=document.getElementById('snn2').value.trim(),ref=document.getElementById('snr').value.trim()||'Seed',prof=document.getElementById('snp').value,w=parseInt(document.getElementById('snw').value)||3;if(!name)return;snodes.push({id:name,ref,prof,w});document.getElementById('snn2').value='';runForce();updSNTable()}
+function addSN(){
+  const name=document.getElementById('snn2').value.trim();
+  if(!name){alert('Informe o nome do participante.');return;}
+  if(snodes.some(n=>n.id===name)){alert('Participante "'+name+'" já existe.');return;}
+  const ref=document.getElementById('snr').value||'Seed';
+  const prof=document.getElementById('snp').value;
+  const w=parseInt(document.getElementById('snw').value)||3;
+  snodes.push({id:name,ref,prof,w});
+  document.getElementById('snn2').value='';
+  updRefDropdown();
+  runForce();
+  updSNTable();
+}
+
+function updRefDropdown(){
+  const sel=document.getElementById('snr');
+  if(!sel)return;
+  const cur=sel.value;
+  sel.innerHTML='<option value="Seed">Seed (ponto de partida)</option>'+
+    snodes.map(n=>'<option value="'+n.id+'" '+(cur===n.id?'selected':'')+'>'+n.id+'</option>').join('');
+}
 function runForce(){
   if(!snodes.length)return;
   const wrap=document.getElementById('snow-wrap');
@@ -1425,6 +1450,7 @@ function deleteSN(i){
   snodes.splice(i,1);
   // Atualizar referências órfãs para Seed
   snodes.forEach(n=>{ if(n.ref===name) n.ref='Seed'; });
+  updRefDropdown();
   runForce();
   updSNTable();
 }
