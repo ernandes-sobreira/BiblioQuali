@@ -3,13 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>MetodoBiblioQual — Bibliometria & Pesquisa Qualitativa</title>
+<title>BiblioAnalyzer — Leis da Bibliometria</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Space+Grotesk:wght@500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-
 :root{
   --bg:#ffffff;--sf:#f5f7fa;--sf2:#eceef3;--bd:#dde1ea;
   --ink:#0d1521;--ink2:#3a4657;--ink3:#7a8799;
@@ -154,164 +152,90 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font
 .no-data p{font-size:13px}
 
 @media(max-width:768px){.sidebar{display:none}.main{margin-left:0;padding:1.5rem}.cg2{grid-template-columns:1fr}}
-
-
-/* ── QUALITATIVA: classes específicas ── */
-.lf2{height:100%;border-radius:3px;transition:width .4s ease}
-.lr{display:flex;align-items:center;gap:.6rem;margin-bottom:.5rem}
-.ll{width:180px;font-size:12.5px;color:var(--ink2);flex-shrink:0}
-.lt{flex:1;height:20px;background:var(--sf2);border-radius:3px;overflow:hidden}
-.lp{width:40px;text-align:right;font-family:'DM Mono',monospace;font-size:12px;color:var(--ink3)}
-.cr{display:flex;align-items:flex-start;gap:.7rem;padding:.6rem 0;border-bottom:1px solid var(--bd)}
-.cs{width:12px;height:12px;border-radius:3px;flex-shrink:0;margin-top:3px}
-.cn{font-weight:600;font-size:13px}.cd2{font-size:12px;color:var(--ink3)}
-.cc{margin-left:auto;font-family:'DM Mono',monospace;font-size:13px;color:var(--anchor);font-weight:500;white-space:nowrap;padding-left:1rem}
-.ei{padding:.65rem 0;border-bottom:1px solid var(--bd)}
-.em{display:flex;align-items:center;gap:.5rem;margin-bottom:.25rem}
-.etag{font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:3px;color:#fff}
-.esrc{font-size:11px;color:var(--ink3)}.etxt{font-size:13px;font-style:italic;color:var(--ink2);line-height:1.55}
-.sg{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:1px;background:var(--bd);border-radius:var(--r);overflow:hidden;border:1px solid var(--bd)}
-.sc{background:var(--bg);padding:1.2rem;min-height:170px}
-.sh{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;display:flex;align-items:center;gap:.4rem}
-.sc textarea{width:100%;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink2);resize:none;outline:none;min-height:110px;line-height:1.6}
-.ss{border-top:3px solid var(--green)}.sw2{border-top:3px solid var(--acc)}.so{border-top:3px solid var(--blue)}.st2{border-top:3px solid var(--amber)}
-.tc{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:1.2rem}
-.tco{border:1px solid var(--bd);border-radius:var(--r);overflow:hidden}
-.th{padding:.5rem 1rem;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#fff}
-.tb2{padding:.8rem;background:var(--bg)}
-.tb2 textarea{width:100%;border:none;background:transparent;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink2);resize:none;outline:none;min-height:100px;line-height:1.55}
-#snow-wrap{border:1px solid var(--bd);border-radius:var(--r);background:var(--sf);overflow:hidden;height:500px;margin-bottom:1rem;position:relative}
-#snow-wrap svg{display:block;width:100%;height:100%}
-#sk-wrap{border:1px solid var(--bd);border-radius:var(--r);background:var(--bg);overflow:hidden;min-height:320px;margin-bottom:1rem}
-#wc-wrap{border:1px solid var(--bd);border-radius:var(--r);background:var(--bg);overflow:hidden;height:380px;display:flex;align-items:center;justify-content:center}
-/* MODO SALA */
-.sala-banner{background:var(--anchor);color:#fff;border-radius:var(--r);padding:1rem 1.4rem;margin-bottom:1.2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
-.sala-banner h3{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;letter-spacing:-.2px}
-.sala-banner p{font-size:12px;color:rgba(255,255,255,.65);margin-top:2px}
-.sala-badge{background:var(--acc);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
-.sala-off{display:none}
-.sala-queue{margin-bottom:1rem}
-.sala-q-item{display:flex;align-items:flex-start;gap:.6rem;padding:.55rem .8rem;border:1px solid var(--bd);border-radius:var(--rs);margin-bottom:.4rem;background:var(--bg);font-size:13px}
-.sala-q-name{font-weight:700;color:var(--anchor);min-width:70px;font-size:12px}
-.sala-q-text{flex:1;color:var(--ink2);line-height:1.5}
-.sala-q-btn{flex-shrink:0}
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;align-items:center;justify-content:center}
-.modal-overlay.open{display:flex}
-.modal{background:var(--bg);border-radius:var(--r);padding:1.8rem;max-width:440px;width:90%;box-shadow:0 12px 48px rgba(0,0,0,.18)}
-.modal h2{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:.4rem}
-.modal p{font-size:13px;color:var(--ink3);margin-bottom:1rem;line-height:1.55}
-.modal-actions{display:flex;gap:.6rem;justify-content:flex-end;margin-top:1.2rem}
-/* HOME tabs */
-.htabs{display:flex;gap:.5rem;margin-bottom:1.5rem}
-.htab{padding:.5rem 1.1rem;font-size:13px;font-weight:600;border:1px solid var(--bd);border-radius:var(--rs);cursor:pointer;background:var(--bg);color:var(--ink3);transition:all .13s;font-family:'DM Sans',sans-serif}
-.htab.active{background:var(--anchor);color:#fff;border-color:var(--anchor)}
-.htab-panel{display:none}.htab-panel.active{display:block}
-/* BIBLIO extra */
-.pb-row{display:flex;align-items:center;gap:.7rem;margin-bottom:.5rem}
-.pb-lbl{width:200px;font-size:12.5px;color:var(--ink2);flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pb-track{flex:1;height:16px;background:var(--sf2);border-radius:3px;overflow:hidden}
-.pb-fill{height:100%;border-radius:3px;transition:width .5s ease}
-.pb-val{width:50px;text-align:right;font-family:'DM Mono',monospace;font-size:12px;color:var(--ink3)}
-.bf-zone{display:flex;align-items:center;gap:.8rem;padding:.7rem 1rem;border-radius:var(--rs);margin-bottom:.5rem;font-size:13px}
-.bf-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
-.no-data{text-align:center;padding:3rem 1rem;color:var(--ink3)}
-.no-data .icon{font-size:2.5rem;margin-bottom:.5rem}
-.no-data p{font-size:13px}
-.corpus-badge{background:rgba(16,163,127,.2);color:#059669;font-size:11px;font-weight:600;padding:3px 11px;border-radius:20px;letter-spacing:.03em;display:none}
-.upload-zone{border:2px dashed var(--bd);border-radius:var(--r);padding:3rem 2rem;text-align:center;cursor:pointer;transition:all .15s;background:var(--sf)}
-.upload-zone:hover,.upload-zone.drag{border-color:var(--anchor);background:#f0f4fa}
-.upload-zone h3{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:var(--ink);margin-bottom:.4rem}
-.upload-zone p{font-size:13px;color:var(--ink3)}
-.formats{display:flex;gap:.5rem;justify-content:center;margin-top:.8rem;flex-wrap:wrap}
-.fmt-badge{font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;background:var(--sf2);color:var(--ink3);border:1px solid var(--bd)}
-.law-eq{font-family:'DM Mono',monospace;font-size:11px;color:var(--ink3);margin-top:.3rem;display:block}
-.ni-law{font-size:10px;color:var(--ink3);display:block;font-weight:400;margin-top:1px}
-
-@media(max-width:768px){.sidebar{display:none}.main{margin-left:0;padding:1.5rem}.tc{grid-template-columns:1fr}.sg{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+
 <header class="hdr">
-  <div class="hdr-brand"><div class="b-icon" style="font-size:10px;letter-spacing:-.3px">MBQ</div><div class="b-text">MetodoBiblioQual<span>Bibliometria & Pesquisa Qualitativa</span></div></div>
+  <div class="hdr-brand"><div class="b-icon">BA</div><div class="b-text">BiblioAnalyzer<span>Leis da Bibliometria</span></div></div>
   <div class="hdr-mid">
     <span class="mod-badge" id="hbadge">Painel inicial</span>
     <span class="corpus-badge" id="corpus-badge">0 artigos</span>
   </div>
-  <div class="hdr-r">v1.0 · UNEMAT</div>
+  <div class="hdr-r">v1.0</div>
 </header>
+
 <div class="layout">
 <nav class="sidebar">
   <div><span class="nl">Início</span>
     <div class="ni active" data-p="home" style="--nc:#e05c2a"><span class="nd" style="--nc:#e05c2a"></span>Painel inicial</div>
-  </div>
-  <div><span class="nl">📊 Bibliometria</span>
     <div class="ni" data-p="import" style="--nc:#2563eb"><span class="nd" style="--nc:#2563eb"></span>Importar dados<span class="ni-law">Excel / WoS / Scopus</span></div>
+  </div>
+  <div><span class="nl">Leis da Bibliometria</span>
     <div class="ni" data-p="lotka" style="--nc:#6d28d9"><span class="nd" style="--nc:#6d28d9"></span>Lei de Lotka<span class="ni-law">Produtividade de autores</span></div>
     <div class="ni" data-p="bradford" style="--nc:#0d9488"><span class="nd" style="--nc:#0d9488"></span>Lei de Bradford<span class="ni-law">Dispersão em periódicos</span></div>
     <div class="ni" data-p="zipf" style="--nc:#b45309"><span class="nd" style="--nc:#b45309"></span>Lei de Zipf<span class="ni-law">Frequência de palavras-chave</span></div>
-    <div class="ni" data-p="temporal" style="--nc:#16a34a"><span class="nd" style="--nc:#16a34a"></span>Produção temporal</div>
+  </div>
+  <div><span class="nl">Análises descritivas</span>
+    <div class="ni" data-p="temporal" style="--nc:#16a34a"><span class="nd" style="--nc:#16a34a"></span>Produção temporal<span class="ni-law">Crescimento anual</span></div>
     <div class="ni" data-p="autores" style="--nc:#2563eb"><span class="nd" style="--nc:#2563eb"></span>Autores mais produtivos</div>
     <div class="ni" data-p="paises" style="--nc:#0d9488"><span class="nd" style="--nc:#0d9488"></span>Países & instituições</div>
     <div class="ni" data-p="areas" style="--nc:#6d28d9"><span class="nd" style="--nc:#6d28d9"></span>Áreas temáticas</div>
   </div>
-  <div><span class="nl">🔍 Pesquisa Qualitativa</span>
-    <div class="ni" data-p="nominal" style="--nc:#2563eb"><span class="nd" style="--nc:#2563eb"></span>Frequência / Sim-Não</div>
-    <div class="ni" data-p="escala" style="--nc:#0d9488"><span class="nd" style="--nc:#0d9488"></span>Escala Likert</div>
-    <div class="ni" data-p="sankey" style="--nc:#0d9488"><span class="nd" style="--nc:#0d9488"></span>Diagrama Sankey</div>
-    <div class="ni" data-p="wordfreq" style="--nc:#16a34a"><span class="nd" style="--nc:#16a34a"></span>Frequência de palavras</div>
-    <div class="ni" data-p="wordcloud" style="--nc:#16a34a"><span class="nd" style="--nc:#16a34a"></span>Nuvem de palavras</div>
-    <div class="ni" data-p="conteudo" style="--nc:#16a34a"><span class="nd" style="--nc:#16a34a"></span>Análise de conteúdo</div>
-    <div class="ni" data-p="bola" style="--nc:#7c3aed"><span class="nd" style="--nc:#7c3aed"></span>Bola de neve</div>
-    <div class="ni" data-p="swot" style="--nc:#d97706"><span class="nd" style="--nc:#d97706"></span>Matriz SWOT / FOFA</div>
-    <div class="ni" data-p="triangulacao" style="--nc:#d97706"><span class="nd" style="--nc:#d97706"></span>Triangulação</div>
-  </div>
 </nav>
-<main class="main">
-<section class="panel active" id="panel-home">
-  <div style="background:linear-gradient(135deg,#1b3557 0%,#254a75 100%);border-radius:9px;padding:2.8rem;color:#fff;margin-bottom:2rem;position:relative;overflow:hidden">
-    <div style="position:absolute;right:1.5rem;bottom:-1rem;font-family:'Space Grotesk',sans-serif;font-size:160px;font-weight:700;color:rgba(255,255,255,.04);line-height:1;pointer-events:none">MQ</div>
-    <div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(255,255,255,.12);color:rgba(255,255,255,.7);padding:3px 11px;border-radius:20px;margin-bottom:.8rem">UNEMAT · PPGCA · ProfÁgua</div>
-    <h1 style="font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;letter-spacing:-.8px;line-height:1.2;margin-bottom:.5rem">MetodoBiblioQual</h1>
-    <p style="color:rgba(255,255,255,.6);font-size:14px;max-width:520px;line-height:1.65">Plataforma integrada de <strong style="color:#fff">bibliometria</strong> (Leis de Lotka, Bradford e Zipf) e <strong style="color:#fff">pesquisa qualitativa</strong> (análise de conteúdo, bola de neve, triangulação e mais).</p>
-  </div>
-  <div class="htabs">
-    <button class="htab active" onclick="switchHTab('biblio',this)">📊 Bibliometria</button>
-    <button class="htab" onclick="switchHTab('qual',this)">🔍 Pesquisa Qualitativa</button>
-  </div>
-  <div class="htab-panel active" id="htab-biblio">
-    <div class="al ai" style="margin-bottom:1.2rem"><span class="al-i">ℹ</span><div>Clique em <strong>Importar dados</strong> na barra lateral, carregue seu Excel do Web of Science ou Scopus, e todos os módulos bibliométricos serão preenchidos automaticamente.</div></div>
-    <div class="cg3">
-      <div class="hmc-c" onclick="nav('import')"><div class="ht2" style="background:#eff6ff;color:#2563eb">Dados</div><div class="htt">Importar planilha</div><div class="hd2">Excel do WoS ou Scopus. Detecta colunas automaticamente.</div></div>
-      <div class="hmc-c" onclick="nav('lotka')"><div class="ht2" style="background:#f5f3ff;color:#6d28d9">Lei de Lotka</div><div class="htt">Produtividade de autores</div><div class="hd2">Distribuição observada vs. esperada (1/n²).</div><span class="law-eq">f(x) = C / x²</span></div>
-      <div class="hmc-c" onclick="nav('bradford')"><div class="ht2" style="background:#f0fdfa;color:#0d9488">Lei de Bradford</div><div class="htt">Dispersão em periódicos</div><div class="hd2">Núcleo e zonas: periódicos centrais vs. periféricos.</div><span class="law-eq">Zonas 1 : n : n²</span></div>
-      <div class="hmc-c" onclick="nav('zipf')"><div class="ht2" style="background:#fffbeb;color:#b45309">Lei de Zipf</div><div class="htt">Frequência de palavras-chave</div><div class="hd2">Rank × frequência ≈ constante.</div><span class="law-eq">f(r) ∝ 1/r</span></div>
-      <div class="hmc-c" onclick="nav('temporal')"><div class="ht2" style="background:#f0fdf4;color:#16a34a">Descritiva</div><div class="htt">Produção temporal</div><div class="hd2">Crescimento anual e taxa CAGR do campo.</div></div>
-      <div class="hmc-c" onclick="nav('autores')"><div class="ht2" style="background:#eff6ff;color:#2563eb">Descritiva</div><div class="htt">Autores mais produtivos</div><div class="hd2">Ranking com percentual de contribuição.</div></div>
-      <div class="hmc-c" onclick="nav('paises')"><div class="ht2" style="background:#f0fdfa;color:#0d9488">Descritiva</div><div class="htt">Países & instituições</div><div class="hd2">Origem geográfica e afiliações.</div></div>
-      <div class="hmc-c" onclick="nav('areas')"><div class="ht2" style="background:#f5f3ff;color:#6d28d9">Descritiva</div><div class="htt">Áreas temáticas</div><div class="hd2">Distribuição por categoria WoS.</div></div>
-    </div>
-  </div>
-  <div class="htab-panel" id="htab-qual">
-    <div class="cg3">
-      <div class="hmc-c" onclick="nav('nominal')"><div class="ht2" style="background:#eff6ff;color:#2563eb">Nominal</div><div class="htt">Frequência / Sim-Não</div><div class="hd2">Proporções, chi-quadrado e tabela 2×2.</div></div>
-      <div class="hmc-c" onclick="nav('escala')"><div class="ht2" style="background:#f0fdfa;color:#0d9488">Ordinal</div><div class="htt">Escala Likert</div><div class="hd2">Mediana, moda e distribuição ordinal.</div></div>
-      <div class="hmc-c" onclick="nav('sankey')"><div class="ht2" style="background:#f0fdfa;color:#0d9488">Fluxo</div><div class="htt">Diagrama Sankey</div><div class="hd2">Fluxo entre categorias ou momentos.</div></div>
-      <div class="hmc-c" onclick="nav('wordfreq')"><div class="ht2" style="background:#f0fdf4;color:#16a34a">Texto</div><div class="htt">Frequência de palavras</div><div class="hd2">Ranking do corpus de entrevistas.</div></div>
-      <div class="hmc-c" onclick="nav('wordcloud')"><div class="ht2" style="background:#f0fdf4;color:#16a34a">Texto</div><div class="htt">Nuvem de palavras</div><div class="hd2">Visualização por frequência relativa.</div></div>
-      <div class="hmc-c" onclick="nav('conteudo')"><div class="ht2" style="background:#f0fdf4;color:#16a34a">Conteúdo</div><div class="htt">Análise de conteúdo</div><div class="hd2">Codebook, codificação e saturação teórica.</div></div>
-      <div class="hmc-c" onclick="nav('bola')"><div class="ht2" style="background:#faf5ff;color:#7c3aed">Rede</div><div class="htt">Bola de neve</div><div class="hd2">Grafo D3 com força de ligação e gerações.</div></div>
-      <div class="hmc-c" onclick="nav('swot')"><div class="ht2" style="background:#fffbeb;color:#d97706">Diagnóstico</div><div class="htt">Matriz SWOT / FOFA</div><div class="hd2">Editor participativo com export.</div></div>
-      <div class="hmc-c" onclick="nav('triangulacao')"><div class="ht2" style="background:#fffbeb;color:#d97706">Validade</div><div class="htt">Triangulação</div><div class="hd2">Convergência entre fontes distintas.</div></div>
-    </div>
-  </div>
-  <div class="dvd"></div>
-  <div class="al ai"><span class="al-i">ℹ</span><div><strong>Aviso metodológico:</strong> esta plataforma estrutura e calcula. Interpretações e inferências são responsabilidade do pesquisador.</div></div>
-</section>
 
+<main class="main">
 
 <!-- HOME -->
-
+<section class="panel active" id="panel-home">
+  <div class="hero">
+    <div class="pill">UNEMAT · PPGCA · ProfÁgua</div>
+    <h1>Análise bibliométrica<br>pelas leis clássicas</h1>
+    <p>Importe sua planilha do Web of Science ou Scopus e obtenha automaticamente as análises de Lotka, Bradford e Zipf, mais estatísticas descritivas completas.</p>
+  </div>
+  <div class="al ai" style="margin-bottom:1.5rem"><span class="al-i">ℹ</span><div><strong>Como usar:</strong> clique em <strong>Importar dados</strong> na barra lateral, carregue seu arquivo Excel exportado do Web of Science ou Scopus, e todos os módulos serão preenchidos automaticamente.</div></div>
+  <p class="pe" style="margin-bottom:.8rem">Módulos disponíveis</p>
+  <div class="hmc">
+    <div class="hmc-c" onclick="nav('lotka')">
+      <div class="ht2" style="background:#f5f3ff;color:#6d28d9">Lei de Lotka</div>
+      <div class="htt">Produtividade de autores</div>
+      <div class="hd2">Distribuição inversa do quadrado: quantos autores publicaram 1, 2, 3... artigos.</div>
+      <span class="law-eq">f(x) = C / x²</span>
+    </div>
+    <div class="hmc-c" onclick="nav('bradford')">
+      <div class="ht2" style="background:#f0fdfa;color:#0d9488">Lei de Bradford</div>
+      <div class="htt">Dispersão em periódicos</div>
+      <div class="hd2">Núcleo e zonas: identifica os periódicos centrais do campo e os periódicos periféricos.</div>
+      <span class="law-eq">Zonas em proporção 1 : n : n²</span>
+    </div>
+    <div class="hmc-c" onclick="nav('zipf')">
+      <div class="ht2" style="background:#fffbeb;color:#b45309">Lei de Zipf</div>
+      <div class="htt">Frequência de palavras-chave</div>
+      <div class="hd2">Rank × frequência = constante. Revela os termos que definem o território conceitual.</div>
+      <span class="law-eq">f(r) ∝ 1/r</span>
+    </div>
+    <div class="hmc-c" onclick="nav('temporal')">
+      <div class="ht2" style="background:#f0fdf4;color:#16a34a">Temporal</div>
+      <div class="htt">Produção ao longo do tempo</div>
+      <div class="hd2">Crescimento anual, taxa de crescimento e previsão de tendência.</div>
+    </div>
+    <div class="hmc-c" onclick="nav('autores')">
+      <div class="ht2" style="background:#eff6ff;color:#2563eb">Autores</div>
+      <div class="htt">Mais produtivos</div>
+      <div class="hd2">Ranking de autores por número de artigos com percentual de contribuição.</div>
+    </div>
+    <div class="hmc-c" onclick="nav('paises')">
+      <div class="ht2" style="background:#f0fdfa;color:#0d9488">Origem</div>
+      <div class="htt">Países & instituições</div>
+      <div class="hd2">Mapa de origem dos artigos por país e instituição afiliada.</div>
+    </div>
+    <div class="hmc-c" onclick="nav('areas')">
+      <div class="ht2" style="background:#f5f3ff;color:#6d28d9">Áreas</div>
+      <div class="htt">Áreas temáticas (WoS)</div>
+      <div class="hd2">Distribuição dos artigos por categoria temática da Web of Science.</div>
+    </div>
+  </div>
+</section>
 
 <!-- IMPORT -->
 <section class="panel" id="panel-import">
@@ -470,300 +394,32 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font
   </div>
 </section>
 
-
-
-
-<!-- HOME -->
-<!-- NOMINAL -->
-<section class="panel" id="panel-nominal">
-<div class="back-bar">
-  <button class="back-btn" onclick="nav('home')">← Voltar ao painel</button>
-  <div class="back-actions"><button class="dl-btn" onclick="dlChart('nomC')">⬇ Baixar gráfico</button></div>
-</div>
-  <div class="pt"><div class="pe">Dados categóricos</div><h1>Frequência &amp; Variáveis Nominais</h1><p>Proporções, chi-quadrado e tabela de contingência 2×2 com Phi.</p></div>
-  <div class="tabs"><button class="tb active" data-t="nom-f">Frequência simples</button><button class="tb" data-t="nom-c">Tabela cruzada 2×2</button><button class="tb" data-t="nom-g">Guia</button></div>
-  <div class="tp active" id="tp-nom-f">
-    <div class="sb"><div class="sbt">Inserir contagens</div>
-      <div class="ir" style="margin-bottom:.8rem"><div class="fld"><label>Variável</label><input type="text" id="nv" value="Pratica atividade física"></div>
-        <div class="fld" style="max-width:130px"><label>Tipo</label><select id="nt" onchange="toggleNT()"><option value="d">Sim/Não</option><option value="c">Categorias</option></select></div></div>
-      <div id="db"><div class="ir"><div class="fld"><label>Sim (n)</label><input type="number" id="ny" value="42" min="0"></div><div class="fld"><label>Não (n)</label><input type="number" id="nn" value="18" min="0"></div><button class="btn bp" onclick="calcNom()">Calcular</button></div></div>
-      <div id="cb2" style="display:none"><div id="cl" style="margin-bottom:.7rem"></div><div class="ir"><div class="fld"><label>Categoria</label><input type="text" id="cn2" placeholder="Nome"></div><div class="fld" style="max-width:90px"><label>n</label><input type="number" id="cvn" value="0" min="0"></div><button class="btn bg" onclick="addCat()">+ Cat.</button><button class="btn bp" onclick="calcNom()">Calcular</button></div></div>
-    </div>
-    <div class="rs" id="nr" style="display:none"><div class="rst">Resultado</div>
-      <div class="sr-row" id="ns"></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start">
-        <div class="cb" style="padding:.8rem"><canvas id="nomC" height="220"></canvas></div>
-        <table class="dt" id="nt2"></table>
-      </div>
-      <div class="al" id="ni2" style="margin-top:.5rem"></div>
-    </div>
-  </div>
-  <div class="tp" id="tp-nom-c">
-    <div class="sb"><div class="sbt">Tabela de contingência 2×2</div>
-      <div class="al ai" style="margin-bottom:1rem"><span class="al-i">ℹ</span><div>Chi-quadrado testa associação. Phi mede a força.</div></div>
-      <div class="ir" style="margin-bottom:.7rem"><div class="fld"><label>Variável A (linhas)</label><input type="text" id="ca" value="Atividade física"></div><div class="fld"><label>Variável B (colunas)</label><input type="text" id="cb3" value="Doença crônica"></div></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;max-width:340px;margin-bottom:.8rem">
-        <div class="fld"><label>Sim/Sim (a)</label><input type="number" id="caa" value="20"></div><div class="fld"><label>Sim/Não (b)</label><input type="number" id="cab" value="22"></div>
-        <div class="fld"><label>Não/Sim (c)</label><input type="number" id="cba" value="8"></div><div class="fld"><label>Não/Não (d)</label><input type="number" id="cbb" value="10"></div>
-      </div>
-      <button class="btn bp" onclick="calcCross()">Calcular</button>
-    </div>
-    <div class="rs" id="xr" style="display:none"><div class="rst">Resultado</div><div class="sr-row" id="xs"></div><table class="dt" id="xt" style="max-width:480px;margin-bottom:1rem"></table><div class="al" id="xi"></div></div>
-  </div>
-  <div class="tp" id="tp-nom-g">
-    <div class="cg3">
-      <div class="card"><div style="font-size:1.2rem;margin-bottom:.4rem">χ²</div><strong>Chi-quadrado</strong><p style="font-size:12.5px;color:var(--ink3);margin-top:.3rem">Testa se a distribuição observada difere do acaso. p&lt;0,05 = associação significativa.</p></div>
-      <div class="card"><div style="font-size:1.2rem;margin-bottom:.4rem">φ</div><strong>Phi / Cramér V</strong><p style="font-size:12.5px;color:var(--ink3);margin-top:.3rem">Tamanho do efeito. 0,1=fraco; 0,3=moderado; 0,5=forte. Reporte sempre.</p></div>
-      <div class="card"><div style="font-size:1.2rem;margin-bottom:.4rem">⚠</div><strong>Fisher exato</strong><p style="font-size:12.5px;color:var(--ink3);margin-top:.3rem">Use quando a frequência esperada em qualquer célula for &lt;5.</p></div>
-    </div>
-    <div class="al aw"><span class="al-i">⚠</span><div>Com N grande, diferenças triviais ficam "significativas". Reporte sempre o tamanho do efeito.</div></div>
-  </div>
-</section>
-
-<!-- LIKERT -->
-<section class="panel" id="panel-escala">
-<div class="back-bar">
-  <button class="back-btn" onclick="nav('home')">← Voltar ao painel</button>
-  <div class="back-actions"><button class="dl-btn" onclick="dlChart('likC')">⬇ Baixar gráfico</button></div>
-</div>
-  <div class="pt"><div class="pe">Dados ordinais</div><h1>Escala Likert &amp; Dados Ordinais</h1><p>Mediana e moda. Não use média para dados ordinais sem validação do instrumento.</p></div>
-  <div class="al aw" style="margin-bottom:1.5rem"><span class="al-i">⚠</span><div><strong>Erro frequente:</strong> calcular média de Likert. Dados ordinais não têm distâncias iguais. Use <strong>mediana</strong> e <strong>moda</strong>.</div></div>
-  <div class="sb"><div class="sbt">Configurar instrumento</div>
-    <div class="ir" style="margin-bottom:.7rem"><div class="fld"><label>Afirmação</label><input type="text" id="lq" value="A pós-graduação contribuiu para minha formação profissional"></div><div class="fld" style="max-width:120px"><label>Pontos</label><select id="lp" onchange="buildLik()"><option value="4">4</option><option value="5" selected>5</option><option value="7">7</option></select></div></div>
-    <div id="li" style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.8rem"></div>
-    <button class="btn bp" onclick="calcLik()">Calcular</button>
-  </div>
-  <div class="rs" id="lr2" style="display:none"><div class="rst">Resultado</div><div class="sr-row" id="ls"></div><div id="lb" style="margin-bottom:1rem"></div><div class="cb" style="max-width:560px"><canvas id="likC" height="200"></canvas></div><div class="al" id="li2" style="margin-top:.8rem"></div></div>
-</section>
-
-<!-- SANKEY -->
-<section class="panel" id="panel-sankey">
-<div class="back-bar">
-  <button class="back-btn" onclick="nav('home')">← Voltar ao painel</button>
-  <div class="back-actions"><button class="dl-btn" onclick="dlSVG('sk-wrap')">⬇ Baixar SVG</button></div>
-</div>
-  <div class="pt"><div class="pe">Fluxo de categorias</div><h1>Diagrama Sankey</h1><p>Visualize fluxo de respostas entre categorias, momentos ou perfis.</p></div>
-  <div class="sb"><div class="sbt">Inserir fluxos (Origem → Destino → Volume)</div>
-    <div class="al ai" style="margin-bottom:.8rem"><span class="al-i">ℹ</span><div>Exemplo: Categoria A → Categoria B (quantos respondentes transitaram entre elas).</div></div>
-    <div id="sfl" style="margin-bottom:.8rem"></div>
-    <div class="ir"><div class="fld"><label>Origem</label><input type="text" id="sf" placeholder="Categoria A"></div><div class="fld"><label>Destino</label><input type="text" id="st2" placeholder="Categoria B"></div><div class="fld" style="max-width:90px"><label>Volume</label><input type="number" id="sv" value="10" min="1"></div><button class="btn bg" onclick="addFlow()">+ Fluxo</button><button class="btn bp" onclick="drawSankey()">Gerar diagrama</button></div>
-  </div>
-  <div id="sk-wrap"></div>
-  <div class="al ai" id="ski" style="display:none"><span class="al-i">ℹ</span><div id="skt"></div></div>
-</section>
-
-<!-- WORD FREQ -->
-<section class="panel" id="panel-wordfreq">
-<div class="back-bar">
-  <button class="back-btn" onclick="nav('home')">← Voltar ao painel</button>
-  <div class="back-actions"><button class="dl-btn" onclick="dlChart('wfC')">⬇ Baixar gráfico</button></div>
-</div>
-  <div class="pt"><div class="pe">Análise de texto</div><h1>Frequência de Palavras</h1><p>Ranking das palavras mais recorrentes no corpus de entrevistas ou documentos.</p></div>
-  <div class="sb"><div class="sbt">Cole o texto do corpus</div>
-    <div class="fld" style="margin-bottom:.8rem"><label>Texto completo</label><textarea id="wft" style="min-height:120px" placeholder="Cole o texto aqui...">A gestão ambiental do Pantanal exige integração entre pesquisa científica e políticas públicas. Os entrevistados destacaram a importância da água e da preservação das espécies nativas. A pesquisa revela que a falta de recursos compromete a gestão local. A conservação da biodiversidade depende da articulação entre governo, sociedade e ciência. Os pesquisadores apontaram que a degradação ambiental afeta as comunidades tradicionais. A participação social é fundamental para a gestão sustentável dos recursos hídricos.</textarea></div>
-    <div class="fld" style="margin-bottom:.8rem"><label>Stopwords adicionais (vírgula)</label><input type="text" id="wfs" value="que,de,a,o,as,os,e,da,do,dos,das,em,para,com,por,uma,um,é,na,no,nas,nos,se,sua,seu,suas,seus,ao,à,pela,pelo,entre,foi,são,mais,como,também,sobre,quando,bem"></div>
-    <div class="ir" style="align-items:center"><div class="fld" style="max-width:130px"><label>Top N palavras</label><input type="number" id="wfn" value="20" min="5" max="100"></div><button class="btn bp" onclick="calcWF()">Analisar</button></div>
-  </div>
-  <div class="rs" id="wfr" style="display:none"><div class="rst">Frequência de palavras</div><div class="sr-row" id="wfs2"></div><div id="wfb" style="margin-bottom:1rem"></div><div class="cb" style="max-width:660px"><canvas id="wfC" height="300"></canvas></div></div>
-</section>
-
-<!-- WORD CLOUD -->
-<section class="panel" id="panel-wordcloud">
-<div class="back-bar">
-  <button class="back-btn" onclick="nav('home')">← Voltar ao painel</button>
-  <div class="back-actions"><button class="dl-btn" onclick="dlCanvas('wc-wrap')">⬇ Baixar imagem</button></div>
-</div>
-  <div class="pt"><div class="pe">Análise de texto</div><h1>Nuvem de Palavras</h1><p>Visualização por frequência relativa. Palavra maior = maior frequência.</p></div>
-  <div class="al aw" style="margin-bottom:1.2rem"><span class="al-i">⚠</span><div><strong>Limitação:</strong> nuvem de palavras é exploratória. Não distingue contexto, valência ou co-ocorrência. Use como ponto de partida.</div></div>
-  <div class="sb"><div class="sbt">Configurar nuvem</div>
-    <div class="fld" style="margin-bottom:.8rem"><label>Texto do corpus</label><textarea id="wct" style="min-height:100px" placeholder="Cole o texto...">A gestão ambiental do Pantanal exige integração entre pesquisa científica e políticas públicas. Os entrevistados destacaram a importância da água e da preservação das espécies nativas. A pesquisa revela que a falta de recursos compromete a gestão local. A conservação da biodiversidade depende da articulação entre governo, sociedade e ciência. Os pesquisadores apontaram que a degradação ambiental afeta as comunidades tradicionais. A participação social é fundamental para a gestão sustentável dos recursos hídricos.</textarea></div>
-    <div class="ir" style="margin-bottom:.8rem"><div class="fld"><label>Stopwords</label><input type="text" id="wcs" value="que,de,a,o,as,os,e,da,do,dos,das,em,para,com,por,uma,um,é,na,no,nas,nos,se,sua,seu,suas,seus,ao,à,pela,pelo,entre,foi,são,mais,como,também,sobre,quando,bem"></div><div class="fld" style="max-width:120px"><label>Máx. palavras</label><input type="number" id="wcm" value="60" min="10" max="120"></div></div>
-    <div class="ir" style="align-items:center"><div class="fld" style="max-width:180px"><label>Paleta</label><select id="wcp"><option value="blue">Azul-âncora</option><option value="multi">Multicolor</option><option value="green">Verde-floresta</option><option value="warm">Quente</option></select></div><button class="btn bp" onclick="drawCloud()">Gerar nuvem</button></div>
-  </div>
-  <div id="wc-wrap"><p style="color:var(--ink3);font-size:13px">Clique em "Gerar nuvem" para visualizar.</p></div>
-</section>
-
-<!-- CONTEÚDO -->
-<section class="panel" id="panel-conteudo">
-<div class="back-bar">
-  <button class="back-btn" onclick="nav('home')">← Voltar ao painel</button>
-  <div class="back-actions">
-    <button class="btn bg" style="height:32px;font-size:12.5px" onclick="openSalaModal()">👥 Modo sala de aula</button>
-    <button class="dl-btn" onclick="exportRelatorio()">⬇ Exportar relatório</button>
-  </div>
-</div>
-  <div class="pt"><div class="pe">Análise interpretativa</div><h1>Análise de Conteúdo</h1><p>Codebook, registro de trechos e curva de saturação teórica.</p></div>
-<div id="sala-banner-wrap">
-<div class="sala-banner sala-off" id="sala-banner">
-  <div>
-    <h3 id="sala-banner-title">Modo Sala de Aula ativo</h3>
-    <p id="sala-banner-sub">Logado como: <strong id="sala-nome-display">—</strong></p>
-  </div>
-  <span class="sala-badge" id="sala-badge">Aluno</span>
-  <button class="btn bg bsm" onclick="exitSala()" style="color:#fff;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.1)">Sair</button>
-</div>
-</div>
-
-  <div class="tabs"><button class="tb active" data-t="ac-cb">Codebook</button><button class="tb" data-t="ac-co">Codificar</button><button class="tb" data-t="ac-sa">Saturação</button><button class="tb" data-t="ac-fr">Frequência</button></div>
-  <div class="tp active" id="tp-ac-cb">
-    <div class="sb"><div class="sbt">Criar código</div>
-      <div class="ir" style="margin-bottom:.6rem"><div class="fld"><label>Nome do código</label><input type="text" id="cbn" placeholder="Ex.: Percepção de risco ambiental"></div><div class="fld" style="max-width:80px"><label>Cor</label><input type="color" id="cbc" value="#2563eb" style="height:36px;padding:2px 4px"></div></div>
-      <div class="ir"><div class="fld"><label>Critério de inclusão</label><textarea id="cbd" placeholder="Quando aplicar este código..." style="min-height:60px"></textarea></div><button class="btn bp" style="align-self:flex-end" onclick="addCode()">+ Código</button></div>
-    </div>
-    <div class="rs"><div class="rst">Codebook</div><div id="cbl"><p style="color:var(--ink3);font-size:13px">Nenhum código.</p></div></div>
-  </div>
-  <div class="tp" id="tp-ac-co">
-    <!-- FILA SALA -->
-    <div id="sala-queue-wrap" style="display:none">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.6rem">
-        <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3)">Fila da turma</span>
-        <button class="btn bg bsm" onclick="clearQueue()">Limpar fila</button>
-      </div>
-      <div class="sala-queue" id="sala-queue-list"><p style="color:var(--ink3);font-size:13px">Aguardando contribuições...</p></div>
-    </div>
-    <!-- MODO ALUNO: campo de envio rápido -->
-    <div id="sala-aluno-wrap" style="display:none" class="sb">
-      <div class="sbt" id="sala-aluno-title">Enviar trecho para a fila</div>
-      <div class="fld" style="margin-bottom:.7rem"><label>Seu trecho</label><textarea id="sala-aluno-text" placeholder="Cole o trecho da sua entrevista ou transcrição..." style="min-height:90px"></textarea></div>
-      <button class="btn bp" onclick="enviarFila()">Enviar para fila do professor</button>
-    </div>
-    <div class="sb"><div class="sbt">Registrar trecho</div>
-      <div class="fld" style="margin-bottom:.7rem"><label>Excerto</label><textarea id="act" placeholder="Cole o trecho da entrevista..." style="min-height:90px"></textarea></div>
-      <div class="ir"><div class="fld"><label>Fonte</label><input type="text" id="acf" placeholder="E1, Doc3..."></div><div class="fld"><label>Código</label><select id="acs"><option value="">— selecione —</option></select></div><button class="btn bp" style="align-self:flex-end" onclick="addExcerpt()">Registrar</button></div>
-    </div>
-    <div class="rs"><div class="rst">Trechos codificados</div><div id="ace"><p style="color:var(--ink3);font-size:13px">Nenhum trecho.</p></div></div>
-  </div>
-  <div class="tp" id="tp-ac-sa">
-    <div class="al ai" style="margin-bottom:1rem"><span class="al-i">ℹ</span><div><strong>Saturação teórica:</strong> quando novas entrevistas não geram novos códigos.</div></div>
-    <div class="sb">
-      <div class="ir"><div class="fld"><label>Entrevistado / coleta</label><input type="text" id="sid" placeholder="E7..."></div><div class="fld" style="max-width:130px"><label>Novos códigos</label><input type="number" id="snn" value="2" min="0"></div><button class="btn bp" style="align-self:flex-end" onclick="addSat()">+ Adicionar</button></div>
-    </div>
-    <div class="rs"><div class="rst">Curva de saturação</div><div class="cb" style="max-width:600px"><canvas id="satC" height="220"></canvas></div><div class="sr-row" id="sts"></div><div class="al" id="sti" style="display:none"></div></div>
-  </div>
-  <div class="tp" id="tp-ac-fr">
-    <div class="rs"><div class="rst">Frequência por código</div><div id="afb"><p style="color:var(--ink3);font-size:13px">Codifique trechos para ver frequência.</p></div><div class="cb" style="max-width:560px;display:none" id="afc"><canvas id="frqC" height="240"></canvas></div></div>
-  </div>
-</section>
-
-<!-- BOLA -->
-<section class="panel" id="panel-bola">
-<div class="back-bar">
-  <button class="back-btn" onclick="nav('home')">← Voltar ao painel</button>
-  <div class="back-actions"><button class="dl-btn" onclick="dlSVG('snow-wrap')">⬇ Baixar SVG</button></div>
-</div>
-  <div class="pt"><div class="pe">Amostragem em cadeia</div><h1>Bola de Neve — Rede de Indicações</h1><p>Grafo interativo com física de força D3. Nós maiores = maior centralidade.</p></div>
-  <div class="al ai" style="margin-bottom:1.2rem"><span class="al-i">ℹ</span><div><strong>Arraste os nós</strong> para reorganizar. Tamanho = grau de centralidade. Espessura da aresta = força da ligação informada.</div></div>
-  <div class="sb"><div class="sbt">Adicionar participante</div>
-    <div class="ir"><div class="fld"><label>Nome / Código</label><input type="text" id="snn2" placeholder="P1..."></div><div class="fld"><label>Indicado por</label><input type="text" id="snr" placeholder="Seed"></div><div class="fld" style="max-width:140px"><label>Perfil</label><select id="snp"><option>Gestora(or)</option><option>Pesquisadora(or)</option><option>Moradora(or)</option><option>Técnica(o)</option><option>Outro</option></select></div><div class="fld" style="max-width:100px"><label>Força (1–5)</label><input type="number" id="snw" value="3" min="1" max="5"></div><button class="btn bp" style="align-self:flex-end" onclick="addSN()">+ Adicionar</button></div>
-  </div>
-  <div id="snow-wrap"><svg id="snow-svg"></svg></div>
-  <div class="sr-row" id="snst"></div>
-  <div class="rs"><div class="rst">Lista de participantes</div>
-    <table class="dt" id="snt"><thead><tr><th>Código</th><th>Perfil</th><th>Indicado por</th><th>Grau</th><th>Geração</th></tr></thead><tbody id="snb"><tr><td colspan="5" style="color:var(--ink3)">Nenhum participante.</td></tr></tbody></table>
-  </div>
-</section>
-
-<!-- SWOT -->
-<section class="panel" id="panel-swot">
-<div class="back-bar">
-  <button class="back-btn" onclick="nav('home')">← Voltar ao painel</button>
-  <div class="back-actions"></div>
-</div>
-  <div class="pt"><div class="pe">Diagnóstico participativo</div><h1>Matriz SWOT / FOFA</h1><p>Edite as células diretamente.</p></div>
-  <div class="al aw" style="margin-bottom:1.2rem"><span class="al-i">⚠</span><div><strong>Limitação:</strong> SWOT é ferramenta de síntese. O valor está no processo participativo, não no preenchimento individual.</div></div>
-  <div class="ir" style="margin-bottom:1.2rem;align-items:flex-end"><div class="fld"><label>Tema</label><input type="text" id="swt" placeholder="Ex.: Programa de pós-graduação"></div><button class="btn bg" onclick="clearSwot()">Limpar</button><button class="btn bp" onclick="exportSwot()">Exportar</button></div>
-  <div class="sg">
-    <div class="sc ss"><div class="sh" style="color:var(--green)">S — Forças</div><textarea id="swS" placeholder="- Corpo docente&#10;- Infraestrutura&#10;- Parcerias"></textarea></div>
-    <div class="sc sw2"><div class="sh" style="color:var(--acc)">W — Fraquezas</div><textarea id="swW" placeholder="- Recursos limitados&#10;- Evasão"></textarea></div>
-    <div class="sc so"><div class="sh" style="color:var(--blue)">O — Oportunidades</div><textarea id="swO" placeholder="- Editais&#10;- Cooperação Sul-Sul"></textarea></div>
-    <div class="sc st2"><div class="sh" style="color:var(--amber)">T — Ameaças</div><textarea id="swT" placeholder="- Cortes&#10;- Instabilidade"></textarea></div>
-  </div>
-  <div class="rs" id="swe" style="display:none"><div class="rst">Relatório</div><pre id="swx" style="font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.65;white-space:pre-wrap"></pre><button class="btn bg bsm" style="margin-top:.8rem" onclick="copySwot()">📋 Copiar</button></div>
-</section>
-
-<!-- TRIANGULAÇÃO -->
-<section class="panel" id="panel-triangulacao">
-<div class="back-bar">
-  <button class="back-btn" onclick="nav('home')">← Voltar ao painel</button>
-  <div class="back-actions"></div>
-</div>
-  <div class="pt"><div class="pe">Validade</div><h1>Triangulação de Fontes</h1><p>Compare evidências de fontes distintas. Divergências são achados — não problemas.</p></div>
-  <div class="sb"><div class="fld" style="margin-bottom:.8rem"><label>Dimensão analisada</label><input type="text" id="trd" placeholder="Ex.: Percepção sobre qualidade da água"></div>
-    <div class="tc">
-      <div class="tco"><div class="th" style="background:var(--blue)">Entrevistas</div><div class="tb2"><textarea id="tr1" placeholder="O que as entrevistas revelam?"></textarea></div></div>
-      <div class="tco"><div class="th" style="background:var(--teal)">Observação / Campo</div><div class="tb2"><textarea id="tr2" placeholder="O que o diário de campo revela?"></textarea></div></div>
-      <div class="tco"><div class="th" style="background:var(--amber)">Documentos</div><div class="tb2"><textarea id="tr3" placeholder="O que documentos apontam?"></textarea></div></div>
-    </div>
-    <button class="btn bp" onclick="analyzeTriang()">Analisar convergência</button>
-  </div>
-  <div class="rs" id="trr" style="display:none"><div class="rst">Análise</div><div id="trc"></div></div>
-</section>
-
-
 </main>
 </div>
-<!-- MODAL SALA -->
-<div class="modal-overlay" id="sala-modal">
-  <div class="modal">
-    <h2>Modo Sala de Aula</h2>
-    <p>Informe seu nome ou código. O professor verá sua contribuição na fila ao vivo.</p>
-    <div class="fld" style="margin-bottom:.8rem">
-      <label>Seu nome / código</label>
-      <input type="text" id="sala-nome-input" placeholder="Ex.: Aluno A, Maria, E1..." style="font-size:15px">
-    </div>
 
 <script>
-// ─── NAVEGAÇÃO UNIFICADA ──────────────────────────────────────────────────────
-const LABELS={
-  home:'Painel inicial',
-  import:'Importar dados',lotka:'Lei de Lotka',bradford:'Lei de Bradford',
-  zipf:'Lei de Zipf',temporal:'Produção temporal',autores:'Autores mais produtivos',
-  paises:'Países & instituições',areas:'Áreas temáticas',
-  nominal:'Frequência / Nominal',escala:'Escala Likert',sankey:'Diagrama Sankey',
-  wordfreq:'Frequência de palavras',wordcloud:'Nuvem de palavras',
-  conteudo:'Análise de conteúdo',bola:'Bola de neve',
-  swot:'Matriz SWOT / FOFA',triangulacao:'Triangulação'
-};
+// ─── NAVEGAÇÃO ────────────────────────────────────────────────────────────────
+const LABELS={home:'Painel inicial',import:'Importar dados',lotka:'Lei de Lotka',bradford:'Lei de Bradford',zipf:'Lei de Zipf',temporal:'Produção temporal',autores:'Autores mais produtivos',paises:'Países & instituições',areas:'Áreas temáticas'};
 function nav(p){
   document.querySelectorAll('.panel').forEach(e=>e.classList.remove('active'));
   document.querySelectorAll('.ni').forEach(e=>e.classList.remove('active'));
-  const panel=document.getElementById('panel-'+p);
-  if(panel)panel.classList.add('active');
-  document.querySelectorAll('[data-p="'+p+'"]').forEach(e=>e.classList.add('active'));
+  document.getElementById('panel-'+p).classList.add('active');
+  document.querySelectorAll(`[data-p="${p}"]`).forEach(e=>e.classList.add('active'));
   document.getElementById('hbadge').textContent=LABELS[p]||p;
 }
 document.querySelectorAll('.ni').forEach(el=>el.addEventListener('click',()=>nav(el.dataset.p)));
-document.querySelectorAll('.tb').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const sec=btn.closest('section');
-    sec.querySelectorAll('.tb').forEach(b=>b.classList.remove('active'));
-    sec.querySelectorAll('.tp').forEach(p=>p.classList.remove('active'));
-    btn.classList.add('active');
-    const t=sec.querySelector('#tp-'+btn.dataset.t);
-    if(t)t.classList.add('active');
-    if(btn.dataset.t==='ac-fr')updFrq();
-  });
-});
-function switchHTab(tab,el){
-  document.querySelectorAll('.htab').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.htab-panel').forEach(p=>p.classList.remove('active'));
-  if(el)el.classList.add('active');
-  document.getElementById('htab-'+tab).classList.add('active');
-}
+
+// ─── CHARTS ──────────────────────────────────────────────────────────────────
 const _ch={};
-const C6=['#2563eb','#0d9488','#7c3aed','#16a34a','#d97706','#e8503a'];
-function mkChart(id,type,data,opts={}){if(_ch[id])_ch[id].destroy();_ch[id]=new Chart(document.getElementById(id),{type,data,options:{responsive:true,plugins:{legend:{display:false}},...opts}});return _ch[id]}
-function mkP(val,lbl,c='var(--anchor)'){return'<div class="st"><span class="v" style="color:'+c+'">'+val+'</span><span class="l">'+lbl+'</span></div>'}
-function dlChart(id){const c=document.getElementById(id);if(!c)return;const a=document.createElement('a');a.href=c.toDataURL('image/png',1);a.download='mbq-'+id+'.png';a.click()}
-function dlSVG(wrapId){const wrap=document.getElementById(wrapId);if(!wrap)return;const svg=wrap.querySelector('svg');if(!svg)return;const data=new XMLSerializer().serializeToString(svg);const blob=new Blob([data],{type:'image/svg+xml'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='mbq-'+wrapId+'.svg';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-function dlCanvas(wrapId){const wrap=document.getElementById(wrapId);if(!wrap)return;const canvas=wrap.querySelector('canvas');if(!canvas)return;const a=document.createElement('a');a.href=canvas.toDataURL('image/png',1);a.download='mbq-wordcloud.png';a.click()}
-function yTitle(t){return{scales:{y:{beginAtZero:true,title:{display:true,text:t}}}}}
-
-
-
-
+const C10=['#2563eb','#0d9488','#6d28d9','#16a34a','#b45309','#e05c2a','#0891b2','#7c3aed','#b91c1c','#065f46'];
+function mkChart(id,type,data,opts={}){
+  if(_ch[id])_ch[id].destroy();
+  _ch[id]=new Chart(document.getElementById(id),{type,data,options:{responsive:true,plugins:{legend:{display:false}},...opts}});
+  return _ch[id];
+}
 function dlChart(id){const c=document.getElementById(id);if(!c)return;const a=document.createElement('a');a.href=c.toDataURL('image/png',1);a.download='biblioanalyzer-'+id+'.png';a.click()}
 
+function mkP(val,lbl,c='var(--anchor)'){return`<div class="st"><span class="v" style="color:${c}">${val}</span><span class="l">${lbl}</span></div>`}
 
 // ─── UPLOAD ───────────────────────────────────────────────────────────────────
 let DATA=null; // corpus global
@@ -779,15 +435,8 @@ function parseFile(file){
     try{
       const wb=XLSX.read(e.target.result,{type:'binary'});
       const ws=wb.Sheets[wb.SheetNames[0]];
-      let rows=XLSX.utils.sheet_to_json(ws,{defval:''});
+      const rows=XLSX.utils.sheet_to_json(ws,{defval:''});
       if(!rows.length){alert('Planilha vazia.');return}
-      // Detectar e remover linha de labels descritivos (ex.: linha com "Authors", "Title"...)
-      const labelWords=['authors','title','source','journal','year','keywords','affiliations','abstract','citations','cited'];
-      const firstRow=rows[0];
-      const firstVals=Object.values(firstRow).map(v=>String(v).toLowerCase().trim());
-      const isLabelRow=labelWords.filter(w=>firstVals.some(v=>v.includes(w))).length>=3;
-      if(isLabelRow) rows=rows.slice(1);
-      if(!rows.length){alert('Planilha sem dados após cabeçalho.');return}
       buildCorpus(rows,file.name);
     }catch(err){alert('Erro ao ler arquivo: '+err.message)}
   };
@@ -796,23 +445,38 @@ function parseFile(file){
 
 // Detecta formato WoS ou Scopus e normaliza colunas
 function buildCorpus(rows,fname){
-  // Detectar colunas
   const cols=Object.keys(rows[0]);
-  const isWoS=cols.some(c=>['AU','TI','SO','PY','DE','WC','C1','TC'].includes(c));
-  const isScopus=cols.some(c=>['Authors','Source title','Year','Author Keywords'].includes(c));
+  // WoS exportação completa — nomes por extenso (formato real do portal CAPES)
+  const isWoSFull=cols.includes('Article Title')||cols.includes('Publication Year');
+  // WoS tagged — códigos curtos PT, AU, TI...
+  const isWoSShort=cols.some(c=>['AU','TI','SO'].includes(c))&&!isWoSFull;
+  // Scopus
+  const isScopus=cols.includes('Source title')&&cols.includes('Author Keywords');
 
-  DATA=rows.map(r=>{
-    if(isWoS) return{
-      authors: splitSep(r['AU']||r['Authors']||'',';'),
-      title: r['TI']||r['Title']||'',
-      journal: (r['SO']||r['Source title']||'').trim().toUpperCase(),
-      year: parseInt(r['PY']||r['Year'])||0,
+  function norm(r){
+    if(isWoSFull) return{
+      authors: splitSep(r['Authors']||r['Author Full Names']||'',';'),
+      title: r['Article Title']||r['Book Chapter Title']||'',
+      journal: (r['Source Title']||r['Book Series Title']||'').trim().toUpperCase(),
+      year: parseInt(r['Publication Year'])||0,
+      keywords: splitSep(r['Author Keywords']||'',';'),
+      kwplus: splitSep(r['Keywords Plus']||'',';'),
+      area: splitSep(r['WoS Categories']||r['Research Areas']||'',';'),
+      affil: r['Affiliations']||r['Addresses']||'',
+      citations: parseInt(r['Times Cited, WoS Core']||r['Times Cited, All Databases']||0)||0,
+      abstract: r['Abstract']||''
+    };
+    if(isWoSShort) return{
+      authors: splitSep(r['AU']||'',';'),
+      title: r['TI']||'',
+      journal: (r['SO']||'').trim().toUpperCase(),
+      year: parseInt(r['PY'])||0,
       keywords: splitSep(r['DE']||'',';'),
       kwplus: splitSep(r['ID']||'',';'),
-      area: splitSep(r['WC']||r['Web of Science Categories']||'',';'),
-      affil: r['C1']||r['Affiliations']||'',
-      citations: parseInt(r['TC']||r['Cited by']||0)||0,
-      abstract: r['AB']||r['Abstract']||''
+      area: splitSep(r['WC']||'',';'),
+      affil: r['C1']||'',
+      citations: parseInt(r['TC']||0)||0,
+      abstract: r['AB']||''
     };
     if(isScopus) return{
       authors: splitSep(r['Authors']||'',','),
@@ -821,25 +485,27 @@ function buildCorpus(rows,fname){
       year: parseInt(r['Year'])||0,
       keywords: splitSep(r['Author Keywords']||'',';'),
       kwplus: splitSep(r['Index Keywords']||'',';'),
-      area: splitSep(r['Subject']||r['SUBJECT AREA']||'',';'),
+      area: splitSep(r['Subject']||'',';'),
       affil: r['Affiliations']||'',
       citations: parseInt(r['Cited by']||0)||0,
       abstract: r['Abstract']||''
     };
-    // Genérico
+    // Genérico — tenta todas as variações
     return{
-      authors: splitSep(r['AU']||r['Authors']||r['Autores']||'',';'),
-      title: r['TI']||r['Title']||r['Título']||'',
-      journal: (r['SO']||r['Journal']||r['Periódico']||'').trim().toUpperCase(),
-      year: parseInt(r['PY']||r['Year']||r['Ano'])||0,
-      keywords: splitSep(r['DE']||r['Keywords']||r['Palavras-chave']||'',';'),
-      kwplus: [],
-      area: splitSep(r['WC']||r['Area']||r['Área']||'',';'),
-      affil: r['C1']||r['Affiliations']||'',
-      citations: parseInt(r['TC']||r['Cited by']||0)||0,
+      authors: splitSep(r['AU']||r['Authors']||'',';'),
+      title: r['TI']||r['Article Title']||r['Title']||'',
+      journal: (r['SO']||r['Source Title']||r['Source title']||'').trim().toUpperCase(),
+      year: parseInt(r['PY']||r['Publication Year']||r['Year'])||0,
+      keywords: splitSep(r['DE']||r['Author Keywords']||r['Keywords']||'',';'),
+      kwplus: splitSep(r['ID']||r['Keywords Plus']||'',';'),
+      area: splitSep(r['WC']||r['WoS Categories']||r['Research Areas']||'',';'),
+      affil: r['C1']||r['Affiliations']||r['Addresses']||'',
+      citations: parseInt(r['TC']||r['Times Cited, WoS Core']||r['Cited by']||0)||0,
       abstract: r['AB']||r['Abstract']||''
     };
-  }).filter(r=>r.year>1900&&r.year<2100);
+  }
+
+  DATA=rows.map(norm).filter(r=>r.year>1900&&r.year<2100);
 
   const n=DATA.length;
   // Atualizar badge
@@ -913,17 +579,11 @@ function runLotka(){
   document.getElementById('lotka-top').innerHTML=topAuts.map(([a,n],i)=>`
     <div class="pb-row"><span class="pb-lbl">${i+1}. ${a}</span><div class="pb-track"><div class="pb-fill" style="width:${(n/topAuts[0][1]*100).toFixed(0)}%;background:rgba(109,40,217,.65)"></div></div><span class="pb-val">${n}</span></div>`).join('');
 
-    const pct1_num = parseFloat(pct1);
-  const desvio = Math.abs(pct1_num - 60).toFixed(1);
-  const adequado = pct1_num >= 50 && pct1_num <= 75;
-  const avalLotka = adequado
-    ? `<span style="color:var(--green);font-weight:700">✓ Aderente</span> ao padrão de Lotka (60% esperado). Desvio de ${desvio} pontos percentuais.`
-    : `<span style="color:var(--acc);font-weight:700">⚠ Desvio significativo</span> do padrão de Lotka (60% esperado). Desvio de ${desvio} pontos percentuais — o corpus pode ser pequeno ou temático demais.`;
   document.getElementById('lotka-interp').innerHTML=`
     <p style="font-size:13px;line-height:1.65;color:var(--ink2)">
-      <strong>${pct1}% dos autores</strong> publicaram apenas 1 artigo na área. ${avalLotka}<br><br>
-      O coeficiente C estimado é <span style="font-family:'DM Mono',monospace">${Cval.toFixed(0)}</span> (Lei de Lotka: f(n) = C/n²).<br><br>
-      <strong>Implicação:</strong> campos que seguem Lotka têm estrutura de cauda longa — poucos autores muito produtivos dominam o campo. Autores com múltiplas publicações são nós centrais da rede de conhecimento e candidatos prioritários para revisão de literatura. Se o desvio for grande, avalie ampliar o corpus.
+      <strong>${pct1}% dos autores</strong> publicaram apenas 1 artigo na área, próximo ao padrão clássico de Lotka (60%). 
+      O coeficiente C estimado é <span style="font-family:'DM Mono',monospace">${Cval.toFixed(0)}</span>.<br><br>
+      <strong>Implicação:</strong> o campo é dominado por poucos autores muito produtivos. Autores com múltiplas publicações são os nós centrais da rede de conhecimento e os candidatos prioritários para revisão de literatura.
     </p>`;
 }
 
@@ -1124,503 +784,13 @@ function runAreas(){
 
   mkChart('areaC','bar',{
     labels:sorted.map(([a])=>a.length>28?a.slice(0,26)+'…':a),
-    datasets:[{data:sorted.map(([,n])=>n),backgroundColor:sorted.map((_,i)=>['#2563eb','#0d9488','#6d28d9','#16a34a','#b45309','#e05c2a','#0891b2','#7c3aed','#b91c1c','#065f46'][i%10]+'bb'),borderRadius:4}]
+    datasets:[{data:sorted.map(([,n])=>n),backgroundColor:sorted.map((_,i)=>C10[i%10]+'bb'),borderRadius:4}]
   },{indexAxis:'y',scales:{x:{beginAtZero:true,title:{display:true,text:'Artigos'}},y:{ticks:{font:{size:11}}}}});
 
   document.getElementById('area-table').innerHTML=`<thead><tr><th>Rank</th><th>Área temática</th><th>Artigos</th><th>%</th></tr></thead><tbody>${sorted.map(([a,n],i)=>`<tr><td class="mono">${i+1}</td><td>${a}</td><td class="mono">${n}</td><td class="mono">${(n/DATA.length*100).toFixed(1)}%</td></tr>`).join('')}</tbody>`;
 }
 
 function yTitle(t){return{scales:{y:{beginAtZero:true,title:{display:true,text:t}}}}}
-
-
-
-// NOMINAL
-let catD=[];
-function toggleNT(){const t=document.getElementById('nt').value;document.getElementById('db').style.display=t==='d'?'':'none';document.getElementById('cb2').style.display=t==='c'?'':'none'}
-function addCat(){const n=document.getElementById('cn2').value.trim(),v=parseInt(document.getElementById('cvn').value)||0;if(!n)return;catD.push({n,v});document.getElementById('cn2').value='';renderCL()}
-function renderCL(){document.getElementById('cl').innerHTML=catD.map((c,i)=>`<div style="display:flex;align-items:center;gap:.6rem;padding:.3rem 0;border-bottom:1px solid var(--bd)"><span style="flex:1;font-size:13px">${c.n}</span><span style="font-family:'DM Mono',monospace;font-size:13px;color:var(--anchor)">n=${c.v}</span><button class="btn bg bsm" onclick="catD.splice(${i},1);renderCL()">✕</button></div>`).join('')}
-function calcNom(){
-  const type=document.getElementById('nt').value;let labels,counts;
-  if(type==='d'){labels=['Sim','Não'];counts=[parseInt(document.getElementById('ny').value)||0,parseInt(document.getElementById('nn').value)||0]}
-  else{if(!catD.length){alert('Adicione categorias');return}labels=catD.map(c=>c.n);counts=catD.map(c=>c.v)}
-  const N=counts.reduce((a,b)=>a+b,0);if(!N)return;
-  const pcts=counts.map(c=>(c/N*100).toFixed(1));
-  const mi=counts.indexOf(Math.max(...counts));
-  const exp=N/counts.length,chi2=counts.reduce((s,c)=>s+(c-exp)**2/exp,0),df=counts.length-1;
-  document.getElementById('nr').style.display='';
-  document.getElementById('ns').innerHTML=mkP(N,'N total')+mkP(labels[mi],'Moda','var(--teal)')+mkP(pcts[mi]+'%','Freq. moda')+mkP(chi2.toFixed(2),'χ² (H₀: uniforme)','var(--acc)');
-  document.getElementById('nt2').innerHTML=`<thead><tr><th>Categoria</th><th>n</th><th>%</th></tr></thead><tbody>${labels.map((l,i)=>`<tr><td>${l}</td><td>${counts[i]}</td><td>${pcts[i]}%</td></tr>`).join('')}</tbody>`;
-  mkChart('nomC','bar',{labels,datasets:[{data:counts,backgroundColor:C6.slice(0,counts.length),borderRadius:5,borderSkipped:false}]},{scales:{y:{beginAtZero:true,title:{display:true,text:'n'}}}});
-  const sig=chi2>3.84&&df===1;const el=document.getElementById('ni2');
-  el.className='al '+(sig?'ao':'ai');
-  el.innerHTML=`<span class="al-i">${sig?'✅':'ℹ'}</span><div>Moda: <strong>${labels[mi]}</strong> (${pcts[mi]}%). χ²=${chi2.toFixed(2)}, df=${df} — ${sig?'distribuição <strong>significativamente não uniforme</strong>':'distribuição compatível com uniforme'} (p${chi2>3.84?'<':'>'}0,05).</div>`;
-}
-function calcCross(){
-  const a=+document.getElementById('caa').value,b=+document.getElementById('cab').value,c=+document.getElementById('cba').value,d=+document.getElementById('cbb').value;
-  const N=a+b+c+d;if(!N)return;
-  const r1=a+b,r2=c+d,c1=a+c,c2=b+d;
-  const chi2=N*(a*d-b*c)**2/(r1*r2*c1*c2),phi=Math.sqrt(chi2/N),sig=chi2>3.841;
-  const vA=document.getElementById('ca').value,vB=document.getElementById('cb3').value;
-  document.getElementById('xr').style.display='';
-  document.getElementById('xs').innerHTML=mkP(N,'N')+mkP(chi2.toFixed(3),'χ²','var(--blue)')+mkP(phi.toFixed(3),'Phi','var(--teal)')+mkP(sig?'p<0,05':'p>0,05','Sig.',sig?'var(--green)':'var(--amber)');
-  document.getElementById('xt').innerHTML=`<thead><tr><th></th><th>${vB}=Sim</th><th>${vB}=Não</th><th>Total</th></tr></thead><tbody><tr><th>${vA}=Sim</th><td class="cd">${a}</td><td>${b}</td><td>${r1}</td></tr><tr><th>${vA}=Não</th><td>${c}</td><td class="cd">${d}</td><td>${r2}</td></tr><tr><th>Total</th><td>${c1}</td><td>${c2}</td><td>${N}</td></tr></tbody>`;
-  const pl=phi<0.1?'fraco':phi<0.3?'fraco-mod':phi<0.5?'moderado':'forte';
-  const el=document.getElementById('xi');el.className='al '+(sig?'ao':'aw');
-  el.innerHTML=`<span class="al-i">${sig?'✅':'⚠'}</span><div>χ²=${chi2.toFixed(3)} — associação ${sig?'<strong>significativa</strong>':'<strong>não significativa</strong>'} (df=1). Phi=${phi.toFixed(3)} (efeito ${pl}).</div>`;
-}
-
-// LIKERT
-const LBL={4:['Discordo tot.','Discordo','Concordo','Concordo tot.'],5:['Discordo tot.','Discordo','Neutro','Concordo','Concordo tot.'],7:['D. muito','Discordo','D. pouco','Neutro','C. pouco','Concordo','C. muito']};
-const LDEF={4:[5,10,20,15],5:[5,10,20,25,10],7:[3,7,12,18,22,15,8]};
-const LCOL={4:['#e8503a','#fb923c','#16a34a','#0d9488'],5:['#e8503a','#fb923c','#94a3b8','#16a34a','#0d9488'],7:['#b91c1c','#e8503a','#fb923c','#94a3b8','#22c55e','#16a34a','#0d9488']};
-function buildLik(){const p=parseInt(document.getElementById('lp').value);document.getElementById('li').innerHTML=LBL[p].map((l,i)=>`<div class="fld" style="min-width:100px;max-width:140px"><label style="font-size:10px">${l}</label><input type="number" class="lf" min="0" value="${LDEF[p][i]}"></div>`).join('')}
-buildLik();
-function calcLik(){
-  const p=parseInt(document.getElementById('lp').value);const cols=LCOL[p];
-  const freqs=Array.from(document.querySelectorAll('.lf')).map(i=>parseInt(i.value)||0);
-  const N=freqs.reduce((a,b)=>a+b,0);if(!N)return;
-  const pcts=freqs.map(f=>f/N*100);
-  let cs=0,med=0;for(let i=0;i<freqs.length;i++){cs+=freqs[i];if(cs>=N/2&&!med)med=i+1}
-  const mode=freqs.indexOf(Math.max(...freqs))+1;
-  const pos=freqs.slice(Math.ceil(p/2)).reduce((a,b)=>a+b,0);
-  document.getElementById('lr2').style.display='';
-  document.getElementById('ls').innerHTML=mkP(N,'N')+mkP(med,'Mediana','var(--blue)')+mkP(mode,'Moda','var(--teal)')+mkP((pos/N*100).toFixed(1)+'%','% concordância','var(--green)');
-  document.getElementById('lb').innerHTML=LBL[p].map((l,i)=>`<div class="lr"><span class="ll">${l}</span><div class="lt"><div class="lf2" style="width:${pcts[i].toFixed(1)}%;background:${cols[i]};height:100%;border-radius:3px;transition:width .4s ease"></div></div><span class="lp">${pcts[i].toFixed(1)}%</span></div>`).join('');
-  mkChart('likC','bar',{labels:LBL[p],datasets:[{data:pcts.map(x=>+x.toFixed(1)),backgroundColor:cols,borderRadius:4}]},{scales:{y:{beginAtZero:true,title:{display:true,text:'%'}}}});
-  const el=document.getElementById('li2');el.className='al ao';
-  el.innerHTML=`<span class="al-i">📝</span><div>Mediana=${med}, Moda=${mode}. ${(pos/N*100).toFixed(1)}% concordam. <strong>Não calcule média</strong> para dados ordinais sem validação do construto.</div>`;
-}
-
-// SANKEY
-let flows=[];
-function addFlow(){const f=document.getElementById('sf').value.trim(),t=document.getElementById('st2').value.trim(),v=parseInt(document.getElementById('sv').value)||1;if(!f||!t)return;flows.push({f,t,v});document.getElementById('sf').value='';document.getElementById('st2').value='';renderFlows()}
-function renderFlows(){document.getElementById('sfl').innerHTML=flows.map((fl,i)=>`<div style="display:flex;align-items:center;gap:.5rem;padding:.3rem 0;border-bottom:1px solid var(--bd);font-size:13px"><span style="flex:1">${fl.f}</span><span style="color:var(--ink3)">→</span><span style="flex:1">${fl.t}</span><span style="font-family:'DM Mono',monospace;color:var(--anchor);width:40px;text-align:right">${fl.v}</span><button class="btn bg bsm" onclick="flows.splice(${i},1);renderFlows()">✕</button></div>`).join('')}
-function drawSankey(){
-  if(!flows.length){alert('Adicione fluxos');return}
-  const wrap=document.getElementById('sk-wrap');
-  const W=wrap.offsetWidth||720,H=Math.max(300,flows.length*40+80);
-  wrap.innerHTML='';
-  const svg=d3.select(wrap).append('svg').attr('width',W).attr('height',H);
-  const lefts=[...new Set(flows.map(f=>f.f))],rights=[...new Set(flows.map(f=>f.t))];
-  const bh=28,gap=14,pad=52,lx=pad,rx=W-pad-130;
-  const ly=(i)=>pad+i*(bh+gap),ry=(i)=>pad+i*(bh+gap);
-  const cols=d3.schemeTableau10;
-  flows.forEach((fl,i)=>{
-    const ly2=ly(lefts.indexOf(fl.f))+bh/2,ry2=ry(rights.indexOf(fl.t))+bh/2;
-    const th=Math.max(2,Math.min(fl.v*1.5,bh-2));
-    svg.append('path').attr('d',`M${lx+130},${ly2} C${lx+220},${ly2} ${rx-80},${ry2} ${rx},${ry2}`).attr('stroke',cols[i%10]).attr('stroke-width',th).attr('fill','none').attr('opacity',.4);
-    svg.append('text').attr('x',(lx+130+rx)/2).attr('y',(ly2+ry2)/2-5).attr('text-anchor','middle').attr('fill','var(--ink3)').attr('font-size',10).attr('font-family','DM Mono,monospace').text(fl.v);
-  });
-  lefts.forEach((n,i)=>{const c=cols[i%10];svg.append('rect').attr('x',lx).attr('y',ly(i)).attr('width',130).attr('height',bh).attr('rx',4).attr('fill',c).attr('opacity',.85);svg.append('text').attr('x',lx+65).attr('y',ly(i)+bh/2+1).attr('text-anchor','middle').attr('dominant-baseline','middle').attr('fill','#fff').attr('font-size',11).attr('font-family','DM Sans,sans-serif').attr('font-weight',600).text(n)});
-  rights.forEach((n,i)=>{const c=cols[(lefts.length+i)%10];svg.append('rect').attr('x',rx).attr('y',ry(i)).attr('width',130).attr('height',bh).attr('rx',4).attr('fill',c).attr('opacity',.85);svg.append('text').attr('x',rx+65).attr('y',ry(i)+bh/2+1).attr('text-anchor','middle').attr('dominant-baseline','middle').attr('fill','#fff').attr('font-size',11).attr('font-family','DM Sans,sans-serif').attr('font-weight',600).text(n);const tot=flows.filter(f=>f.t===n).reduce((s,f)=>s+f.v,0);svg.append('text').attr('x',rx+140).attr('y',ry(i)+bh/2+1).attr('dominant-baseline','middle').attr('fill','var(--ink3)').attr('font-size',11).attr('font-family','DM Mono,monospace').text(tot)});
-  wrap.style.minHeight=H+'px';
-  document.getElementById('ski').style.display='flex';
-  document.getElementById('skt').textContent=`${flows.length} fluxo(s) — volume total: ${flows.reduce((s,f)=>s+f.v,0)} — ${lefts.length} origem(ns) → ${rights.length} destino(s).`;
-}
-
-// WORD FREQ
-function tokenize(text,stopsStr){const stops=new Set(stopsStr.split(',').map(s=>s.trim().toLowerCase()).filter(Boolean));return text.toLowerCase().replace(/[^a-záàâãéèêíïóôõöúçñ\s]/g,'').split(/\s+/).filter(t=>t.length>2&&!stops.has(t))}
-function calcWF(){
-  const text=document.getElementById('wft').value,stops=document.getElementById('wfs').value,top=parseInt(document.getElementById('wfn').value)||20;
-  const tokens=tokenize(text,stops);const freq={};tokens.forEach(t=>{freq[t]=(freq[t]||0)+1});
-  const sorted=Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,top);if(!sorted.length)return;
-  const mx=sorted[0][1];
-  document.getElementById('wfr').style.display='';
-  document.getElementById('wfs2').innerHTML=mkP(tokens.length,'Tokens totais')+mkP(Object.keys(freq).length,'Vocabulário')+mkP(sorted[0][0],'Palavra +freq','var(--blue)')+mkP(sorted[0][1],'Freq. máx');
-  document.getElementById('wfb').innerHTML=sorted.map(([w,n],i)=>mkBar(w,n,(n/mx*100),C6[i%6])).join('');
-  mkChart('wfC','bar',{labels:sorted.map(d=>d[0]),datasets:[{data:sorted.map(d=>d[1]),backgroundColor:sorted.map((_,i)=>C6[i%6]),borderRadius:4}]},{scales:{x:{ticks:{maxRotation:45,font:{size:11}}},y:{beginAtZero:true,title:{display:true,text:'Frequência'}}}});
-}
-
-// WORD CLOUD
-const WCP={blue:['#1e3a5f','#2563eb','#3b82f6','#60a5fa','#0d9488','#1d4ed8'],multi:['#2563eb','#e8503a','#7c3aed','#16a34a','#d97706','#0d9488'],green:['#14532d','#16a34a','#22c55e','#0d9488','#1e3a5f','#65a30d'],warm:['#7f1d1d','#e8503a','#d97706','#b45309','#92400e','#dc2626']};
-function drawCloud(){
-  const text=document.getElementById('wct').value,stops=document.getElementById('wcs').value,maxW=parseInt(document.getElementById('wcm').value)||60,pal=document.getElementById('wcp').value;
-  const colors=WCP[pal]||WCP.blue;const tokens=tokenize(text,stops);const freq={};tokens.forEach(t=>{freq[t]=(freq[t]||0)+1});
-  const sorted=Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,maxW);if(!sorted.length)return;
-  const wrap=document.getElementById('wc-wrap');wrap.innerHTML='';
-  const W=wrap.offsetWidth||700,H=370;
-  const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;wrap.appendChild(canvas);
-  const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
-  const mxF=sorted[0][1];const placed=[];
-  function overlaps(x,y,w,h){for(const r of placed){if(x<r.x+r.w&&x+w>r.x&&y<r.y+r.h&&y+h>r.y)return true}return false}
-  sorted.forEach(([word,count],idx)=>{
-    const size=Math.round(12+(count/mxF)*46);
-    ctx.font=`${idx<5?700:500} ${size}px DM Sans,sans-serif`;
-    const tw=ctx.measureText(word).width;const color=colors[idx%colors.length];
-    for(let a=0;a<240;a++){
-      const angle=a*.35,radius=a*3;
-      const cx=W/2+Math.cos(angle)*radius,cy=H/2+Math.sin(angle)*radius;
-      const x=cx-tw/2,y=cy-size/2;
-      if(x<4||x+tw>W-4||y<4||y+size>H-4)continue;
-      if(!overlaps(x,y-size,tw,size+4)){ctx.fillStyle=color;ctx.fillText(word,x,cy+size/4);placed.push({x,y:y-size,w:tw,h:size+4});break}
-    }
-  });
-}
-
-// ANÁLISE DE CONTEÚDO
-let codebook=[],excerpts=[],satD=[];
-function addCode(){const n=document.getElementById('cbn').value.trim(),c=document.getElementById('cbc').value,d=document.getElementById('cbd').value.trim();if(!n)return;codebook.push({n,c,d,cnt:0});document.getElementById('cbn').value='';document.getElementById('cbd').value='';renderCB();updSel()}
-function renderCB(){const el=document.getElementById('cbl');if(!codebook.length){el.innerHTML='<p style="color:var(--ink3);font-size:13px">Nenhum código.</p>';return}el.innerHTML=codebook.map((c,i)=>`<div class="cr"><div class="cs" style="background:${c.c}"></div><div style="flex:1"><div class="cn">${c.n}</div><div class="cd2">${c.d||'—'}</div></div><div class="cc">${c.cnt}</div><button class="btn bg bsm" onclick="codebook.splice(${i},1);renderCB();updSel()">✕</button></div>`).join('')}
-function updSel(){const sel=document.getElementById('acs');sel.innerHTML='<option value="">— selecione —</option>'+codebook.map((c,i)=>`<option value="${i}">${c.n}</option>`).join('')}
-function addExcerpt(){const tr=document.getElementById('act').value.trim(),fo=document.getElementById('acf').value.trim(),ci=parseInt(document.getElementById('acs').value);if(!tr||isNaN(ci))return;codebook[ci].cnt++;excerpts.push({tr,fo,code:codebook[ci].n,c:codebook[ci].c});document.getElementById('act').value='';renderExc();renderCB()}
-function renderExc(){const el=document.getElementById('ace');if(!excerpts.length){el.innerHTML='<p style="color:var(--ink3);font-size:13px">Nenhum trecho.</p>';return}el.innerHTML=excerpts.map(e=>`<div class="ei"><div class="em"><span class="etag" style="background:${e.c}">${e.code}</span><span class="esrc">${e.fo||'—'}</span></div><div class="etxt">"${e.tr}"</div></div>`).join('')}
-function addSat(){const id=document.getElementById('sid').value.trim(),n=parseInt(document.getElementById('snn').value)||0;if(!id)return;satD.push({id,n});document.getElementById('sid').value='';document.getElementById('snn').value='0';renderSat()}
-function renderSat(){if(!satD.length)return;const labels=satD.map(d=>d.id),vals=satD.map(d=>d.n);mkChart('satC','line',{labels,datasets:[{label:'Novos códigos',data:vals,borderColor:'var(--blue)',backgroundColor:'rgba(37,99,235,.08)',tension:.3,fill:true,pointRadius:5,pointBackgroundColor:'var(--blue)'}]},{plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'Novos códigos'}}}});const tot=vals.reduce((a,b)=>a+b,0),lr=(()=>{let r=0;for(let i=vals.length-1;i>=0;i--){if(vals[i]===0)r++;else break}return r})();document.getElementById('sts').innerHTML=mkP(satD.length,'Entrevistas')+mkP(tot,'Total códigos')+mkP(lr,'Consec. sem novos','var(--teal)');const el=document.getElementById('sti');el.style.display='flex';if(lr>=3){el.className='al ao';el.innerHTML='<span class="al-i">✅</span><div><strong>Saturação atingida.</strong> 3+ entrevistas consecutivas sem novos códigos.</div>'}else if(lr>=1){el.className='al aw';el.innerHTML=`<span class="al-i">⚠</span><div>${lr} entrevista(s) sem novos códigos. Continue até 3 consecutivas.</div>`}else{el.className='al ai';el.innerHTML='<span class="al-i">ℹ</span><div>Ainda surgindo novos códigos. Continue a coleta.</div>'}}
-function updFrq(){if(!codebook.length)return;const s=[...codebook].sort((a,b)=>b.cnt-a.cnt),mx=s[0].cnt||1;document.getElementById('afb').innerHTML=s.map(c=>mkBar(c.n,c.cnt,(c.cnt/mx*100),c.c)).join('');if(s.some(c=>c.cnt>0)){document.getElementById('afc').style.display='';mkChart('frqC','bar',{labels:s.map(c=>c.n),datasets:[{data:s.map(c=>c.cnt),backgroundColor:s.map(c=>c.c),borderRadius:4}]},{indexAxis:'y',scales:{x:{beginAtZero:true,title:{display:true,text:'Frequência'}}}})}}
-
-// BOLA DE NEVE
-let snodes=[],sim=null;
-const PC={'Gestora(or)':'#2563eb','Pesquisadora(or)':'#0d9488','Moradora(or)':'#16a34a','Técnica(o)':'#7c3aed','Outro':'#d97706'};
-function getGen(id,nodes,cache={}){if(id in cache)return cache[id];const n=nodes.find(x=>x.id===id);if(!n||n.ref==='Seed'||n.ref===''){cache[id]=0;return 0}const g=getGen(n.ref,nodes,cache);cache[id]=g+1;return g+1}
-function addSN(){const name=document.getElementById('snn2').value.trim(),ref=document.getElementById('snr').value.trim()||'Seed',prof=document.getElementById('snp').value,w=parseInt(document.getElementById('snw').value)||3;if(!name)return;snodes.push({id:name,ref,prof,w});document.getElementById('snn2').value='';runForce();updSNTable()}
-function runForce(){
-  if(!snodes.length)return;
-  const wrap=document.getElementById('snow-wrap');
-  const W=wrap.clientWidth||700, H=500;
-  // Margem interna para os nós não saírem
-  const PAD=52;
-  const svg=d3.select('#snow-svg')
-    .attr('width',W).attr('height',H)
-    .attr('viewBox',`0 0 ${W} ${H}`);
-  svg.selectAll('*').remove();
-  const nodes=snodes.map(n=>({...n}));
-  const links=snodes.filter(n=>n.ref&&n.ref!=='Seed'&&snodes.some(m=>m.id===n.ref))
-    .map(n=>({source:n.ref,target:n.id,w:n.w}));
-  const deg={};nodes.forEach(n=>{deg[n.id]=0});
-  links.forEach(l=>{deg[l.target]=(deg[l.target]||0)+1});
-  const gc={};nodes.forEach(n=>{n.gen=getGen(n.id,snodes,gc)});
-  // Iniciar posições dentro do quadrante (evita explosão inicial)
-  nodes.forEach(n=>{
-    n.x = PAD + Math.random()*(W-PAD*2);
-    n.y = PAD + Math.random()*(H-PAD*2);
-  });
-  if(sim)sim.stop();
-  sim=d3.forceSimulation(nodes)
-    .force('link',d3.forceLink(links).id(d=>d.id).distance(d=>80+d.w*8).strength(.6))
-    .force('charge',d3.forceManyBody().strength(-200))
-    .force('center',d3.forceCenter(W/2,H/2).strength(.08))
-    .force('collide',d3.forceCollide(d=>18+deg[d.id]*4+6).strength(.9))
-    .force('bound',()=>{
-      // Força de borda: empurra nós que saem do limite de volta
-      nodes.forEach(d=>{
-        const r=18+deg[d.id]*4;
-        if(d.x<PAD+r)d.x=PAD+r;
-        if(d.x>W-PAD-r)d.x=W-PAD-r;
-        if(d.y<PAD+r)d.y=PAD+r;
-        if(d.y>H-PAD-r)d.y=H-PAD-r;
-      });
-    })
-    .alphaDecay(0.02)
-    .velocityDecay(0.4);
-  const g=svg.append('g');
-  svg.append('defs').append('marker')
-    .attr('id','arr').attr('viewBox','0 -4 8 8').attr('refX',14)
-    .attr('markerWidth',6).attr('markerHeight',6).attr('orient','auto')
-    .append('path').attr('d','M0,-4L8,0L0,4').attr('fill','#b0b8c8');
-  const link=g.append('g').selectAll('line').data(links).join('line')
-    .attr('stroke','#c8cdd8').attr('stroke-width',d=>Math.max(1.5,d.w*0.9))
-    .attr('marker-end','url(#arr)').attr('stroke-opacity',.75);
-  const wlbl=g.append('g').selectAll('text').data(links).join('text')
-    .attr('fill','#7a8799').attr('font-size',9).attr('font-family','DM Mono,monospace')
-    .attr('text-anchor','middle').attr('dy',-5).text(d=>d.w);
-  const node=g.append('g').selectAll('g').data(nodes).join('g')
-    .style('cursor','grab')
-    .call(d3.drag()
-      .on('start',(e,d)=>{if(!e.active)sim.alphaTarget(.25).restart();d.fx=d.x;d.fy=d.y;d3.select(e.sourceEvent.target.closest('g')).style('cursor','grabbing')})
-      .on('drag',(e,d)=>{
-        const r=18+deg[d.id]*4;
-        d.fx=Math.max(PAD+r,Math.min(W-PAD-r,e.x));
-        d.fy=Math.max(PAD+r,Math.min(H-PAD-r,e.y));
-      })
-      .on('end',(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null;d3.select(e.sourceEvent.target.closest('g')).style('cursor','grab')}));
-  node.append('circle')
-    .attr('r',d=>14+deg[d.id]*4)
-    .attr('fill',d=>PC[d.prof]||'#94a3b8')
-    .attr('opacity',.92)
-    .attr('stroke','#fff').attr('stroke-width',2.5);
-  // Label dentro do nó
-  node.append('text')
-    .attr('text-anchor','middle').attr('dominant-baseline','middle')
-    .attr('fill','#fff').attr('font-size',10).attr('font-family','DM Sans,sans-serif')
-    .attr('font-weight',700).attr('pointer-events','none')
-    .text(d=>d.id.length>6?d.id.slice(0,5)+'…':d.id);
-  // Nome abaixo do nó
-  node.append('text')
-    .attr('text-anchor','middle').attr('y',d=>20+deg[d.id]*4)
-    .attr('fill','#3d4b5c').attr('font-size',9.5).attr('font-family','DM Sans,sans-serif')
-    .attr('pointer-events','none').text(d=>d.id);
-  // Badge geração acima do nó
-  node.append('text')
-    .attr('text-anchor','middle').attr('y',d=>-20-deg[d.id]*4)
-    .attr('fill',d=>PC[d.prof]||'#94a3b8')
-    .attr('font-size',8.5).attr('font-family','DM Mono,monospace').attr('font-weight',700)
-    .attr('pointer-events','none').text(d=>d.gen===0?'SEED':'G'+d.gen);
-  sim.on('tick',()=>{
-    // Clampar posições no tick para garantir que nós fiquem dentro
-    nodes.forEach(d=>{
-      const r=18+deg[d.id]*4;
-      d.x=Math.max(PAD+r,Math.min(W-PAD-r,d.x));
-      d.y=Math.max(PAD+r,Math.min(H-PAD-r,d.y));
-    });
-    link
-      .attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
-      .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
-    wlbl
-      .attr('x',d=>(d.source.x+d.target.x)/2)
-      .attr('y',d=>(d.source.y+d.target.y)/2);
-    node.attr('transform',d=>`translate(${d.x},${d.y})`);
-  });
-  document.getElementById('snst').innerHTML=
-    mkP(nodes.length,'Total')+
-    mkP(nodes.filter(n=>n.gen===0).length,'Seeds','var(--acc)')+
-    mkP(links.length,'Ligações','var(--teal)')+
-    mkP(Math.max(0,...Object.values(deg)),'Grau máximo','var(--violet)');
-}
-function updSNTable(){const gc={};document.getElementById('snb').innerHTML=snodes.map(n=>{const g=getGen(n.id,snodes,gc),d=snodes.filter(m=>m.ref===n.id).length;return`<tr><td><strong>${n.id}</strong></td><td>${n.prof}</td><td>${n.ref}</td><td>${d}</td><td>G${g}</td></tr>`}).join('')||'<tr><td colspan="5" style="color:var(--ink3)">Nenhum participante.</td></tr>'}
-
-// SWOT
-function exportSwot(){const t=document.getElementById('swt').value||'Objeto';document.getElementById('swx').textContent=`MATRIZ SWOT — ${t}\n${'─'.repeat(50)}\n\nFORÇAS:\n${document.getElementById('swS').value||'—'}\n\nFRAQUEZAS:\n${document.getElementById('swW').value||'—'}\n\nOPORTUNIDADES:\n${document.getElementById('swO').value||'—'}\n\nAMEAÇAS:\n${document.getElementById('swT').value||'—'}`;document.getElementById('swe').style.display=''}
-function clearSwot(){['S','W','O','T'].forEach(q=>document.getElementById('sw'+q).value='');document.getElementById('swe').style.display='none'}
-function copySwot(){navigator.clipboard.writeText(document.getElementById('swx').textContent)}
-
-// TRIANGULAÇÃO
-function analyzeTriang(){
-  const [t1,t2,t3]=['tr1','tr2','tr3'].map(id=>document.getElementById(id).value.trim());
-  const dim=document.getElementById('trd').value||'—';
-  const filled=[t1,t2,t3].filter(Boolean).length;
-  let html=`<p style="font-size:13px;margin-bottom:.8rem"><strong>Dimensão:</strong> ${dim}</p>`;
-  html+=filled===3?`<div class="al ao"><span class="al-i">✅</span><div>Três fontes preenchidas. Analise convergências, divergências e complementaridades.</div></div>`:`<div class="al aw"><span class="al-i">⚠</span><div>Apenas ${filled}/3 fontes preenchidas.</div></div>`;
-  ['Entrevistas','Campo/Observação','Documentos'].forEach((lbl,i)=>{const t=[t1,t2,t3][i];if(t)html+=`<div style="margin-top:.7rem;padding:.7rem 1rem;background:var(--sf);border-radius:5px;border-left:3px solid ${['var(--blue)','var(--teal)','var(--amber)'][i]}"><strong style="font-size:11px;text-transform:uppercase;letter-spacing:.05em">${lbl}</strong><p style="font-size:13px;margin-top:.3rem">${t}</p></div>`});
-  document.getElementById('trr').style.display='';document.getElementById('trc').innerHTML=html;
-}
-
-// DOWNLOAD HELPERS
-function dlChart(id){
-  const canvas=document.getElementById(id);if(!canvas)return;
-  const a=document.createElement('a');a.href=canvas.toDataURL('image/png',1.0);a.download='qualanalyzer-'+id+'.png';a.click();
-}
-function dlCanvas(wrapId){
-  const wrap=document.getElementById(wrapId);if(!wrap)return;
-  const canvas=wrap.querySelector('canvas');if(!canvas)return;
-  const a=document.createElement('a');a.href=canvas.toDataURL('image/png',1.0);a.download='qualanalyzer-wordcloud.png';a.click();
-}
-function dlSVG(wrapId){
-  const wrap=document.getElementById(wrapId);if(!wrap)return;
-  const svg=wrap.querySelector('svg');if(!svg)return;
-  const data=new XMLSerializer().serializeToString(svg);
-  const blob=new Blob([data],{type:'image/svg+xml'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');a.href=url;a.download='qualanalyzer-'+wrapId+'.svg';a.click();
-  setTimeout(()=>URL.revokeObjectURL(url),1000);
-}
-
-
-// ─── MODO SALA DE AULA ────────────────────────────────────────────────────
-let salaMode = null; // null | 'professor' | 'aluno'
-let salaNome = '';
-const SALA_KEY = 'qualanalyzer_sala_queue';
-const SALA_ROLE_KEY = 'qualanalyzer_sala_role';
-let salaInterval = null;
-
-function openSalaModal(){
-  document.getElementById('sala-modal').classList.add('open');
-  setTimeout(()=>document.getElementById('sala-nome-input').focus(),100);
-}
-function closeSalaModal(){
-  document.getElementById('sala-modal').classList.remove('open');
-}
-function confirmSala(){
-  const nome = document.getElementById('sala-nome-input').value.trim();
-  if(!nome){alert('Informe seu nome ou código.');return;}
-  salaNome = nome;
-  closeSalaModal();
-  // Pergunta se é professor ou aluno
-  const isProfessor = confirm('Você é o professor (operador da tela principal)?\n\nOK = Professor (vê a fila ao vivo)\nCancelar = Aluno (envia trechos para a fila)');
-  salaMode = isProfessor ? 'professor' : 'aluno';
-  activateSala();
-}
-function activateSala(){
-  // Banner
-  const banner = document.getElementById('sala-banner');
-  banner.classList.remove('sala-off');
-  document.getElementById('sala-nome-display').textContent = salaNome;
-  document.getElementById('sala-badge').textContent = salaMode === 'professor' ? '👨‍🏫 Professor' : '👩‍🎓 Aluno';
-  document.getElementById('sala-banner-title').textContent = salaMode === 'professor'
-    ? 'Modo Sala — Visão do Professor'
-    : 'Modo Sala — Visão do Aluno';
-
-  if(salaMode === 'professor'){
-    document.getElementById('sala-queue-wrap').style.display = '';
-    document.getElementById('sala-aluno-wrap').style.display = 'none';
-    // Poll da fila a cada 2s
-    salaInterval = setInterval(renderQueue, 2000);
-    renderQueue();
-  } else {
-    document.getElementById('sala-queue-wrap').style.display = 'none';
-    document.getElementById('sala-aluno-wrap').style.display = '';
-    document.getElementById('sala-aluno-title').textContent = 'Enviar trecho — ' + salaNome;
-  }
-}
-function exitSala(){
-  salaMode = null; salaNome = '';
-  if(salaInterval){clearInterval(salaInterval);salaInterval=null;}
-  document.getElementById('sala-banner').classList.add('sala-off');
-  document.getElementById('sala-queue-wrap').style.display = 'none';
-  document.getElementById('sala-aluno-wrap').style.display = 'none';
-}
-
-// Fila via localStorage (funciona quando abas do mesmo navegador / mesma máquina)
-function getQueue(){try{return JSON.parse(localStorage.getItem(SALA_KEY)||'[]')}catch{return[]}}
-function saveQueue(q){localStorage.setItem(SALA_KEY,JSON.stringify(q))}
-
-function enviarFila(){
-  const texto = document.getElementById('sala-aluno-text').value.trim();
-  if(!texto){alert('Digite o trecho antes de enviar.');return;}
-  const q = getQueue();
-  q.push({nome:salaNome, texto, ts: Date.now()});
-  saveQueue(q);
-  document.getElementById('sala-aluno-text').value = '';
-  alert('Trecho enviado para a fila do professor! ✅');
-}
-
-function renderQueue(){
-  const q = getQueue();
-  const el = document.getElementById('sala-queue-list');
-  if(!q.length){el.innerHTML='<p style="color:var(--ink3);font-size:13px">Fila vazia. Aguardando alunos...</p>';return;}
-  el.innerHTML = q.map((item,i)=>`
-    <div class="sala-q-item">
-      <span class="sala-q-name">${item.nome}</span>
-      <span class="sala-q-text">${item.texto}</span>
-      <div style="display:flex;flex-direction:column;gap:4px">
-        <button class="btn bp bsm sala-q-btn" onclick="usarDaFila(${i})">Usar</button>
-        <button class="btn bg bsm sala-q-btn" onclick="removerDaFila(${i})">✕</button>
-      </div>
-    </div>`).join('');
-}
-
-function usarDaFila(i){
-  const q = getQueue();
-  const item = q[i];
-  if(!item)return;
-  // Preenche o campo de excerto e fonte
-  document.getElementById('act').value = item.texto;
-  document.getElementById('acf').value = item.nome;
-  // Remove da fila
-  q.splice(i,1);
-  saveQueue(q);
-  renderQueue();
-  // Scroll para o campo
-  document.getElementById('act').scrollIntoView({behavior:'smooth', block:'center'});
-}
-function removerDaFila(i){
-  const q = getQueue();
-  q.splice(i,1);
-  saveQueue(q);
-  renderQueue();
-}
-function clearQueue(){
-  if(confirm('Limpar toda a fila?')){saveQueue([]);renderQueue();}
-}
-
-// ─── EXPORT RELATÓRIO ────────────────────────────────────────────────────────
-function exportRelatorio(){
-  if(!codebook.length){alert('Crie ao menos um código antes de exportar.');return;}
-
-  const now = new Date().toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric'});
-
-  // Agrupar trechos por código
-  const byCode = {};
-  codebook.forEach(c=>{byCode[c.n]=[]});
-  excerpts.forEach(e=>{if(byCode[e.code]!==undefined)byCode[e.code].push(e)});
-
-  // Saturação
-  const satRows = satD.map(d=>`<tr><td>${d.id}</td><td style="text-align:center">${d.n}</td></tr>`).join('');
-
-  // Trechos por código
-  const codesHtml = codebook.map(c=>{
-    const items = byCode[c.n]||[];
-    const trechos = items.length
-      ? items.map(e=>`<div class="ex-item"><span class="ex-tag" style="background:${c.c}">${e.code}</span><span class="ex-src">${e.fo||'—'}</span><div class="ex-txt">"${e.tr}"</div></div>`).join('')
-      : '<p style="color:#888;font-size:12px;font-style:italic">Nenhum trecho registrado.</p>';
-    return `
-      <div class="code-block">
-        <div class="code-head"><span class="code-dot" style="background:${c.c}"></span><strong>${c.n}</strong> <span class="code-cnt">${c.cnt} trecho(s)</span></div>
-        <div class="code-def"><em>Critério:</em> ${c.d||'—'}</div>
-        ${trechos}
-      </div>`;
-  }).join('');
-
-  const win = window.open('','_blank');
-  win.document.write(`<!DOCTYPE html><html lang="pt-BR"><head>
-<meta charset="UTF-8">
-<title>Relatório de Análise de Conteúdo</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;font-size:13px;color:#0f1923;background:#fff;padding:0}
-.page{max-width:720px;margin:0 auto;padding:2.5rem 2rem 4rem}
-.cover{border-bottom:3px solid #1e3a5f;padding-bottom:1.5rem;margin-bottom:2rem}
-.cover h1{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:700;color:#1e3a5f;letter-spacing:-.5px;margin-bottom:.3rem}
-.cover .sub{font-size:12px;color:#7a8799;margin-top:.3rem}
-.section-title{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#7a8799;margin:2rem 0 .8rem;padding-bottom:.4rem;border-bottom:1px solid #dde1ea}
-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-bottom:1rem}
-th{background:#f4f6f9;padding:.4rem .7rem;text-align:left;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7a8799;border-bottom:1px solid #dde1ea}
-td{padding:.4rem .7rem;border-bottom:1px solid #eaecf2}
-.code-block{border:1px solid #dde1ea;border-radius:7px;padding:1rem 1.2rem;margin-bottom:1rem}
-.code-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.3rem;font-size:14px}
-.code-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
-.code-cnt{font-size:11px;color:#7a8799;margin-left:auto;font-family:'DM Mono',monospace}
-.code-def{font-size:12px;color:#3d4b5c;margin-bottom:.7rem;padding:.4rem .6rem;background:#f4f6f9;border-radius:4px}
-.ex-item{padding:.5rem 0;border-top:1px solid #eaecf2}
-.ex-tag{font-size:10px;font-weight:700;padding:2px 6px;border-radius:3px;color:#fff;margin-right:.4rem}
-.ex-src{font-size:11px;color:#7a8799}
-.ex-txt{font-size:13px;font-style:italic;color:#3d4b5c;margin-top:.25rem;line-height:1.55}
-.stat-row{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1.2rem}
-.stat{background:#f4f6f9;border:1px solid #dde1ea;border-radius:7px;padding:.7rem 1rem;min-width:100px}
-.stat .v{font-family:'DM Mono',monospace;font-size:20px;font-weight:600;color:#1e3a5f}
-.stat .l{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#7a8799;margin-top:2px}
-.footer{margin-top:3rem;padding-top:1rem;border-top:1px solid #dde1ea;font-size:11px;color:#7a8799;display:flex;justify-content:space-between}
-@media print{.no-print{display:none}.page{padding:1.5rem 1rem}}
-</style>
-</head><body>
-<div class="page">
-  <div class="no-print" style="background:#1e3a5f;color:#fff;padding:.8rem 1.2rem;border-radius:7px;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between">
-    <span style="font-size:13px;font-weight:600">Relatório de Análise de Conteúdo — QualAnalyzer</span>
-    <button onclick="window.print()" style="background:var(--acc,#e8503a);color:#fff;border:none;padding:6px 16px;border-radius:5px;font-size:12px;font-weight:700;cursor:pointer">🖨 Imprimir / Salvar PDF</button>
-  </div>
-  <div class="cover">
-    <h1>Relatório de Análise de Conteúdo</h1>
-    <div class="sub">Gerado em ${now} · QualAnalyzer v2.0 · UNEMAT / PPGCA / ProfÁgua</div>
-  </div>
-
-  <div class="section-title">Resumo</div>
-  <div class="stat-row">
-    <div class="stat"><div class="v">${codebook.length}</div><div class="l">Códigos</div></div>
-    <div class="stat"><div class="v">${excerpts.length}</div><div class="l">Trechos</div></div>
-    <div class="stat"><div class="v">${satD.length}</div><div class="l">Entrevistas</div></div>
-    <div class="stat"><div class="v">${satD.reduce((a,d)=>a+d.n,0)}</div><div class="l">Total códigos gerados</div></div>
-  </div>
-
-  <div class="section-title">Codebook — Códigos e Trechos</div>
-  ${codesHtml}
-
-  ${satD.length ? `
-  <div class="section-title">Curva de Saturação Teórica</div>
-  <table>
-    <thead><tr><th>Entrevistado / coleta</th><th>Novos códigos</th></tr></thead>
-    <tbody>${satRows}</tbody>
-  </table>` : ''}
-
-  <div class="footer">
-    <span>QualAnalyzer v2.0 — UNEMAT · PPGCA · ProfÁgua</span>
-    <span>Ernandes Sobreira Oliveira Junior</span>
-  </div>
-</div>
-</body></html>`);
-  win.document.close();
-}
-
-
 </script>
 </body>
 </html>
